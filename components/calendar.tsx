@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect, useRef } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { ChevronLeft, ChevronRight, CalendarDays, List, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -8,6 +8,7 @@ import type { CalendarEvent } from "@/types/event"
 import { EventPopover } from "@/components/event-popover"
 import { MiniCalendar } from "@/components/mini-calendar"
 import { EventList } from "@/components/event-list"
+import { SearchCommand } from "@/components/search-command"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -42,29 +43,20 @@ export function Calendar({ events = [] }: CalendarProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("1M")
   const [direction, setDirection] = useState(0)
   const [displayMode, setDisplayMode] = useState<DisplayMode>("list")
-  const [searchExpanded, setSearchExpanded] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
-  const searchInputRef = useRef<HTMLInputElement>(null)
   const isMobile = useIsMobile()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault()
-        setSearchExpanded((prev) => {
-          if (!prev) {
-            setTimeout(() => searchInputRef.current?.focus(), 50)
-          }
-          return !prev
-        })
-      }
-      if (e.key === "Escape" && searchExpanded) {
-        setSearchExpanded(false)
+        setSearchOpen(true)
       }
     }
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [searchExpanded])
+  }, [])
 
   const effectiveViewMode = useMemo(() => {
     if (isMobile) {
@@ -149,10 +141,7 @@ export function Calendar({ events = [] }: CalendarProps) {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => {
-                setSearchExpanded(!searchExpanded)
-                if (!searchExpanded) setTimeout(() => searchInputRef.current?.focus(), 50)
-              }}
+              onClick={() => setSearchOpen(true)}
               className="h-7 w-7 md:h-8 md:w-8 mr-1"
             >
               <Search className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -161,10 +150,7 @@ export function Calendar({ events = [] }: CalendarProps) {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => {
-                setSearchExpanded(!searchExpanded)
-                if (!searchExpanded) setTimeout(() => searchInputRef.current?.focus(), 50)
-              }}
+              onClick={() => setSearchOpen(true)}
               className="h-7 md:h-8 px-2 md:px-3 text-xs mr-1 md:mr-2 gap-1.5"
             >
               <Search className="h-3.5 w-3.5 text-muted-foreground" />
@@ -224,31 +210,6 @@ export function Calendar({ events = [] }: CalendarProps) {
           )}
         </div>
       </motion.div>
-
-      <AnimatePresence>
-        {searchExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.1 }}
-            className="mb-4 overflow-hidden"
-          >
-            <div className="flex items-center gap-2 p-2 border border-border rounded-md bg-muted/30">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                ref={searchInputRef}
-                type="text"
-                placeholder="Search events..."
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-              <kbd className="hidden md:inline-flex h-5 select-none items-center rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-                ESC
-              </kbd>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence mode="wait" initial={false}>
         {displayMode === "list" ? (
@@ -341,15 +302,6 @@ export function Calendar({ events = [] }: CalendarProps) {
               })}
             </div>
 
-            {selectedEvent && (
-              <EventPopover
-                event={selectedEvent}
-                open={!!selectedEvent}
-                onOpenChange={(open) => !open && setSelectedEvent(null)}
-              >
-                <span />
-              </EventPopover>
-            )}
           </motion.div>
         ) : (
           <motion.div
@@ -378,6 +330,32 @@ export function Calendar({ events = [] }: CalendarProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <SearchCommand
+        events={events}
+        open={searchOpen}
+        onOpenChange={setSearchOpen}
+        onSelectEvent={(event) => {
+          setSearchOpen(false)
+          // Small delay to let search dialog close before opening popover
+          setTimeout(() => {
+            // Navigate to the event's month
+            const eventMonth = startOfMonth(parseISO(event.startDate))
+            setCurrentMonth(eventMonth)
+            setSelectedEvent(event)
+          }, 150)
+        }}
+      />
+
+      {selectedEvent && (
+        <EventPopover
+          event={selectedEvent}
+          open={!!selectedEvent}
+          onOpenChange={(open) => !open && setSelectedEvent(null)}
+        >
+          <span />
+        </EventPopover>
+      )}
     </div>
   )
 }

@@ -1,11 +1,15 @@
 import { XLogo } from "@phosphor-icons/react/dist/ssr"
 import { ContributeDialog } from "./contribute-dialog"
+import { ApiDocsPopover } from "./api-docs-popover"
 
 export function Footer() {
   return (
     <footer className="flex-shrink-0 bg-background/80 backdrop-blur-sm border-t border-border">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between text-sm text-muted-foreground">
-        <ContributeDialog />
+        <div className="flex items-center gap-4">
+          <ContributeDialog />
+          <ApiDocsPopover />
+        </div>
 
         <span>
           Open Source maintained by{" "}
