@@ -3,8 +3,12 @@ import Link from "next/link"
 import { format, parseISO } from "date-fns"
 import { ArrowLeft, ExternalLink, MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import type { Metadata } from "next"
 
-import { getEventById } from "@/lib/events"
+import { getEventById, loadEvents } from "@/lib/events"
+import { JsonLd, generateEventJsonLd, generateBreadcrumbJsonLd } from "@/lib/structured-data"
+
+const BASE_URL = 'https://events.pracht.tech'
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -24,6 +28,42 @@ function formatDateRange(start: string, end?: string) {
   return `${format(startDate, "MMMM d, yyyy")} - ${format(endDate, "MMMM d, yyyy")}`
 }
 
+export async function generateStaticParams() {
+  const events = await loadEvents()
+  return events.map((event) => ({ id: event.id }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const event = await getEventById(id)
+
+  if (!event) {
+    return { title: "Event Not Found" }
+  }
+
+  const dateStr = formatDateRange(event.startDate, event.endDate)
+  const title = `${event.title} | ${dateStr}`
+  const description = event.description || `${event.title} - ${dateStr}. Join this blockchain and crypto event.`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/event/${event.id}` },
+    openGraph: {
+      title: event.title,
+      description,
+      url: `/event/${event.id}`,
+      type: "website",
+      siteName: "Crypto & AI Events 2026",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: event.title,
+      description,
+    },
+  }
+}
+
 export default async function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const event = await getEventById(id)
@@ -32,8 +72,18 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
     notFound()
   }
 
+  const jsonLdData = [
+    generateEventJsonLd(event),
+    generateBreadcrumbJsonLd([
+      { name: "Home", url: BASE_URL },
+      { name: event.title, url: `${BASE_URL}/event/${event.id}` },
+    ]),
+  ]
+
   return (
-    <main className="min-h-screen p-4 md:p-6 lg:p-12">
+    <>
+      <JsonLd data={jsonLdData} />
+      <main className="min-h-screen p-4 md:p-6 lg:p-12">
       <div className="max-w-2xl mx-auto">
         {/* Back button */}
         <Link
@@ -54,7 +104,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
         <div className="flex flex-col gap-2 mb-6 text-muted-foreground">
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5" />
-            <span className="text-base">{formatDateRange(event.startDate, event.endDate)}</span>
+            <time dateTime={event.startDate} className="text-base">{formatDateRange(event.startDate, event.endDate)}</time>
           </div>
           {event.location && (
             <div className="flex items-center gap-2">
@@ -91,5 +141,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
         </div>
       </div>
     </main>
+    </>
   )
 }

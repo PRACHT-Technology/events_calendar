@@ -85,7 +85,7 @@ export function EventList({ events }: EventListProps) {
 
   return (
     <motion.div
-      className="w-full h-full max-h-[calc(100vh-8rem)] overflow-y-auto"
+      className="w-full h-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.15 }}
