@@ -1,0 +1,22 @@
+title: ETHMumbai
+startDate: "2026-03-12"
+endDate: "2026-03-15"
+url: https://www.ethmumbai.in/
+
+description: >
+  Best conference & hackathon combining learning and hands-on building
+
+type: conference
+categories:
+  - ethereum
+
+location:
+  city: Mumbai
+  country: India
+  continent: asia
+
+attendance: "2000+"
+
+social:
+  twitter: https://x.com/ethmumbai
+  telegram: https://t.me/ethmumbai

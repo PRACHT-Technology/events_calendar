@@ -1,0 +1,21 @@
+title: NeurIPS 2026
+startDate: "2026-12-02"
+endDate: "2026-12-07"
+url: https://neurips.cc
+
+description: >
+  Premier gathering for machine learning researchers with keynotes workshops and poster sessions
+
+type: conference
+categories:
+  - ai
+
+location:
+  city: San Diego
+  country: USA
+  continent: north-america
+
+attendance: "5000+"
+
+social:
+  discord: https://discord.com

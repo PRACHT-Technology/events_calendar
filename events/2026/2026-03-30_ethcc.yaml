@@ -1,0 +1,22 @@
+title: ETHCC
+startDate: "2026-03-30"
+endDate: "2026-04-02"
+url: https://ethcc.io/
+
+description: >
+  Europes largest annual Ethereum event with 400+ speakers at Palais des Festivals
+
+type: conference
+categories:
+  - ethereum
+
+location:
+  city: Cannes
+  country: France
+  continent: europe
+
+attendance: "6500+"
+
+social:
+  twitter: https://x.com/EthCC
+  telegram: https://t.me/ethccweek

@@ -1,0 +1,21 @@
+title: BUIDL Europe
+startDate: "2026-01-07"
+endDate: "2026-01-08"
+url: https://www.buidleurope.com/
+
+description: >
+  Builder-focused technical conference with workshops on smart contracts Layer-2 security and zero-knowledge cryptography
+
+type: conference
+categories:
+  - ethereum
+
+location:
+  city: Lisbon
+  country: Portugal
+  continent: europe
+
+attendance: "500-800"
+
+social:
+  twitter: https://x.com/ekang426

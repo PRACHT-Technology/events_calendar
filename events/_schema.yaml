@@ -1,0 +1,224 @@
+# Event Schema Documentation
+# ===========================
+#
+# This file documents the YAML schema for event files.
+# Use this as a reference when contributing new events.
+#
+# File Location: events/YYYY/YYYY-MM-DD_event-slug.yaml
+# ID Generation: Derived from filename (e.g., "2026-02-17_ethdenver")
+
+schema_version: "1.0"
+
+# ============================================
+# REQUIRED FIELDS
+# ============================================
+# These fields must be present in every event file
+
+required:
+  title:
+    type: string
+    description: Event name
+    max_length: 100
+    example: "ETHDenver"
+
+  startDate:
+    type: string
+    format: "YYYY-MM-DD"
+    description: Event start date in ISO format
+    example: "2026-02-17"
+
+  url:
+    type: string
+    format: url (https)
+    description: Official event website
+    example: "https://ethdenver.com/"
+
+# ============================================
+# OPTIONAL FIELDS
+# ============================================
+
+optional:
+  endDate:
+    type: string
+    format: "YYYY-MM-DD"
+    description: Event end date (omit for single-day events)
+    example: "2026-02-21"
+
+  description:
+    type: string
+    description: Brief event description (1-2 sentences)
+    max_length: 500
+    example: "World's largest Ethereum BUIDLathon with 25000+ innovators"
+
+  type:
+    type: string
+    allowed_values:
+      - conference
+      - hackathon
+      - meetup
+      - popup-village
+      - festival
+      - workshop
+      - summit
+    example: "conference"
+
+  categories:
+    type: array of strings
+    description: Event categories (first is primary, determines color)
+    allowed_values:
+      - ethereum
+      - solana
+      - bitcoin
+      - blockchain
+      - ai
+      - defi
+      - privacy
+      - institutional
+      - developer
+      - zk
+      - web3
+      - rwa
+    example: ["ethereum", "defi"]
+
+  color:
+    type: string
+    format: hex (#RRGGBB)
+    description: Custom color override (defaults to primary category color)
+    example: "#627EEA"
+
+  location:
+    type: object
+    fields:
+      venue:
+        type: string
+        description: Venue name
+        example: "National Western Complex"
+      city:
+        type: string
+        description: City name
+        example: "Denver"
+      country:
+        type: string
+        description: Country name
+        example: "USA"
+      continent:
+        type: string
+        allowed_values:
+          - africa
+          - asia
+          - europe
+          - north-america
+          - south-america
+          - oceania
+          - global  # for online/virtual events
+        example: "north-america"
+
+  attendance:
+    type: string
+    description: Expected attendance range
+    pattern: "digits with optional + or range"
+    examples:
+      - "500+"
+      - "1000-2000"
+      - "25000+"
+
+  social:
+    type: object
+    fields:
+      twitter:
+        type: string
+        format: url
+        example: "https://x.com/ethereumdenver"
+      telegram:
+        type: string
+        format: url
+        example: "https://t.me/Ethdenver"
+      discord:
+        type: string
+        format: url
+        example: "https://discord.gg/ethdenver"
+      farcaster:
+        type: string
+        format: url
+        example: "https://farcaster.xyz/ethdenver"
+
+  tags:
+    type: array of strings
+    description: Additional searchable keywords
+    max_items: 10
+    example: ["buidlathon", "hackathon", "builders"]
+
+# ============================================
+# CATEGORY COLOR MAPPING
+# ============================================
+# Colors are auto-assigned based on primary category
+
+category_colors:
+  ethereum: "#627EEA"
+  solana: "#14F195"
+  bitcoin: "#F7931A"
+  blockchain: "#3B82F6"
+  ai: "#8B5CF6"
+  defi: "#10B981"
+  privacy: "#6366F1"
+  institutional: "#0EA5E9"
+  developer: "#F59E0B"
+  zk: "#EC4899"
+  web3: "#06B6D4"
+  rwa: "#84CC16"
+
+# ============================================
+# EXAMPLE: FULL EVENT FILE
+# ============================================
+#
+# # events/2026/2026-02-17_ethdenver.yaml
+#
+# title: ETHDenver
+# startDate: "2026-02-17"
+# endDate: "2026-02-21"
+# url: https://ethdenver.com/
+#
+# description: >
+#   World's largest Ethereum BUIDLathon with 25000+ innovators
+#   from 125+ countries.
+#
+# type: conference
+# categories:
+#   - ethereum
+#   - defi
+#
+# location:
+#   venue: National Western Complex
+#   city: Denver
+#   country: USA
+#   continent: north-america
+#
+# attendance: "25000+"
+#
+# social:
+#   twitter: https://x.com/ethereumdenver
+#   telegram: https://t.me/Ethdenver
+#
+# tags:
+#   - buidlathon
+#   - hackathon
+#   - flagship
+
+# ============================================
+# EXAMPLE: MINIMAL EVENT FILE
+# ============================================
+#
+# # events/2026/2026-01-06_ethglobal-happy-hour.yaml
+#
+# title: ETHGlobal Happy Hour Lisbon
+# startDate: "2026-01-06"
+# url: https://luma.com/event/evt-ahOKSViGTCFVHs4
+#
+# type: meetup
+# categories:
+#   - ethereum
+#
+# location:
+#   city: Lisbon
+#   country: Portugal
+#   continent: europe

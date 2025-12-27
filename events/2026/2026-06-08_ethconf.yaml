@@ -1,0 +1,23 @@
+title: ETHConf
+startDate: "2026-06-08"
+endDate: "2026-06-10"
+url: https://ethconf.com/
+
+description: >
+  Ethereums major conference with 5000+ attendees 200+ speakers and 100+ exhibitors
+
+type: conference
+categories:
+  - ethereum
+
+location:
+  city: New York City
+  country: USA
+  continent: north-america
+
+attendance: "5000+"
+
+social:
+  twitter: https://x.com/ethereumconf
+  discord: https://ethglobal.com/discord
+  farcaster: https://farcaster.xyz/ethglobal

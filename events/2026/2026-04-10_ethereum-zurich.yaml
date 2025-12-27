@@ -1,0 +1,22 @@
+title: Ethereum Zurich
+startDate: "2026-04-10"
+endDate: "2026-04-12"
+url: https://ethereumzuri.ch/
+
+description: >
+  Learning-focused Ethereum event for beginners and builders
+
+type: conference
+categories:
+  - ethereum
+
+location:
+  city: Zürich
+  country: Switzerland
+  continent: europe
+
+attendance: "1000+"
+
+social:
+  twitter: https://x.com/EthereumZurich
+  telegram: https://t.me/ethereumzurich

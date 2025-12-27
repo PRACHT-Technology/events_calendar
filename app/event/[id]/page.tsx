@@ -4,7 +4,7 @@ import { format, parseISO } from "date-fns"
 import { ArrowLeft, ExternalLink, MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-import { sampleEvents } from "@/lib/events"
+import { getEventById } from "@/lib/events"
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -26,7 +26,7 @@ function formatDateRange(start: string, end?: string) {
 
 export default async function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const event = sampleEvents.find((e) => e.id === id)
+  const event = await getEventById(id)
 
   if (!event) {
     notFound()

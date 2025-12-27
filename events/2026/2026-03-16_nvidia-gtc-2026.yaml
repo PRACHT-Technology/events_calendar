@@ -1,0 +1,21 @@
+title: NVIDIA GTC 2026
+startDate: "2026-03-16"
+endDate: "2026-03-19"
+url: https://www.nvidia.com/gtc/
+
+description: >
+  Premier global AI conference for developers researchers and business leaders on physical AI AI factories agentic AI
+
+type: conference
+categories:
+  - ai
+
+location:
+  city: San Jose
+  country: USA
+  continent: north-america
+
+attendance: "25000+"
+
+social:
+  twitter: https://x.com/nvidia

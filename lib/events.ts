@@ -1,143 +1,112 @@
+import fs from "fs"
+import path from "path"
+import { parse } from "yaml"
+import { eventSchema, categoryColors, DEFAULT_COLOR, type YAMLEvent } from "./event-schema"
 import type { CalendarEvent } from "@/types/event"
 
-export const sampleEvents: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "React Conf",
-    startDate: "2025-12-15",
-    endDate: "2025-12-17",
-    description: "Annual React conference with workshops and talks from the React team.",
-    url: "https://react.dev/conf",
-    location: "Henderson, Nevada",
-    color: "#61dafb",
-    twitterUrl: "https://x.com/reactjs",
-  },
-  {
-    id: "2",
-    title: "Next.js Meetup",
-    startDate: "2025-12-20",
-    description: "Local Next.js community meetup with lightning talks.",
-    url: "https://nextjs.org",
-    location: "San Francisco, CA",
-    twitterUrl: "https://x.com/nextjs",
-  },
-  {
-    id: "3",
-    title: "New Year Hackathon",
-    startDate: "2026-01-10",
-    endDate: "2026-01-12",
-    description: "48-hour hackathon to kick off the new year with innovative projects.",
-    url: "https://hackathon.dev",
-    location: "Austin, TX",
-    color: "#f59e0b",
-  },
-  {
-    id: "4",
-    title: "TypeScript Summit",
-    startDate: "2026-02-05",
-    endDate: "2026-02-06",
-    description: "Deep dive into TypeScript features and best practices.",
-    url: "https://typescriptlang.org",
-    location: "Seattle, WA",
-    color: "#3178c6",
-  },
-  {
-    id: "5",
-    title: "CSS Day",
-    startDate: "2026-03-14",
-    description: "A full day dedicated to modern CSS techniques and layouts.",
-    url: "https://cssday.dev",
-    location: "Amsterdam, Netherlands",
-    color: "#264de4",
-  },
-  {
-    id: "6",
-    title: "React Summit",
-    startDate: "2026-04-22",
-    endDate: "2026-04-24",
-    description: "The biggest React conference in Europe.",
-    url: "https://reactsummit.com",
-    location: "Amsterdam, Netherlands",
-    color: "#61dafb",
-    twitterUrl: "https://x.com/reactsummit",
-  },
-  {
-    id: "7",
-    title: "Node Congress",
-    startDate: "2026-05-18",
-    endDate: "2026-05-19",
-    description: "All things Node.js - performance, security, and scalability.",
-    url: "https://nodecongress.com",
-    location: "Berlin, Germany",
-    color: "#68a063",
-  },
-  {
-    id: "8",
-    title: "GraphQL Conf",
-    startDate: "2026-06-08",
-    endDate: "2026-06-10",
-    description: "Learn about GraphQL from the maintainers and community experts.",
-    url: "https://graphqlconf.org",
-    location: "San Francisco, CA",
-    color: "#e535ab",
-  },
-  {
-    id: "9",
-    title: "Tailwind Connect",
-    startDate: "2026-07-15",
-    description: "Official Tailwind CSS conference with Adam Wathan.",
-    url: "https://tailwindcss.com",
-    location: "Cambridge, UK",
-    color: "#06b6d4",
-    twitterUrl: "https://x.com/tailwindcss",
-  },
-  {
-    id: "10",
-    title: "VueConf",
-    startDate: "2026-08-20",
-    endDate: "2026-08-22",
-    description: "The official Vue.js conference.",
-    url: "https://vueconf.com",
-    location: "Miami, FL",
-    color: "#42b883",
-  },
-  {
-    id: "11",
-    title: "Vercel Ship",
-    startDate: "2026-09-10",
-    description: "Vercel's annual product launch event.",
-    url: "https://vercel.com/ship",
-    location: "New York, NY",
-    twitterUrl: "https://x.com/vercel",
-  },
-  {
-    id: "12",
-    title: "JSConf",
-    startDate: "2026-10-05",
-    endDate: "2026-10-07",
-    description: "The original JavaScript community conference.",
-    url: "https://jsconf.com",
-    location: "San Diego, CA",
-    color: "#f7df1e",
-  },
-  {
-    id: "13",
-    title: "AI Dev Summit",
-    startDate: "2026-11-12",
-    endDate: "2026-11-14",
-    description: "Exploring AI integration in modern web development.",
-    url: "https://aidevsummit.com",
-    location: "Las Vegas, NV",
-    color: "#8b5cf6",
-  },
-  {
-    id: "14",
-    title: "DevFest 2026",
-    startDate: "2026-12-01",
-    endDate: "2026-12-03",
-    description: "Google Developer Groups end-of-year celebration.",
-    url: "https://devfest.dev",
-    location: "Multiple Cities",
-    color: "#ea4335",
-  },
-]
+/**
+ * Derives event ID from filename
+ * e.g., "2026-02-17_ethdenver.yaml" -> "2026-02-17_ethdenver"
+ */
+function deriveIdFromFilename(filename: string): string {
+  return filename.replace(/\.yaml$/, "")
+}
+
+/**
+ * Formats location object into a single string
+ */
+function formatLocation(location?: YAMLEvent["location"]): string | undefined {
+  if (!location) return undefined
+  const parts = [location.venue, location.city, location.country].filter(Boolean)
+  return parts.length > 0 ? parts.join(", ") : undefined
+}
+
+/**
+ * Resolves color from explicit color, category, or default
+ */
+function resolveColor(event: YAMLEvent): string {
+  // Explicit color takes priority
+  if (event.color) return event.color
+
+  // Use primary category color
+  if (event.categories && event.categories.length > 0) {
+    return categoryColors[event.categories[0]] || DEFAULT_COLOR
+  }
+
+  return DEFAULT_COLOR
+}
+
+/**
+ * Loads and parses all YAML event files from the events directory
+ */
+export async function loadEvents(): Promise<CalendarEvent[]> {
+  const eventsDir = path.join(process.cwd(), "events")
+  const events: CalendarEvent[] = []
+
+  // Check if events directory exists
+  if (!fs.existsSync(eventsDir)) {
+    console.warn("Events directory not found:", eventsDir)
+    return []
+  }
+
+  // Get all year directories (folders named with 4 digits)
+  const entries = fs.readdirSync(eventsDir, { withFileTypes: true })
+  const years = entries
+    .filter((entry) => entry.isDirectory() && /^\d{4}$/.test(entry.name))
+    .map((entry) => entry.name)
+    .sort()
+
+  for (const year of years) {
+    const yearDir = path.join(eventsDir, year)
+    const files = fs.readdirSync(yearDir).filter((f) => f.endsWith(".yaml")).sort()
+
+    for (const file of files) {
+      const filePath = path.join(yearDir, file)
+
+      try {
+        const content = fs.readFileSync(filePath, "utf-8")
+        const rawEvent = parse(content)
+
+        // Validate with Zod
+        const result = eventSchema.safeParse(rawEvent)
+        if (!result.success) {
+          console.error(`Invalid event file: ${filePath}`)
+          console.error(result.error.issues)
+          continue // Skip invalid files
+        }
+
+        const yamlEvent = result.data
+        const id = deriveIdFromFilename(file)
+
+        // Transform to CalendarEvent
+        const event: CalendarEvent = {
+          id,
+          title: yamlEvent.title,
+          startDate: yamlEvent.startDate,
+          endDate: yamlEvent.endDate,
+          description: yamlEvent.description,
+          url: yamlEvent.url,
+          color: resolveColor(yamlEvent),
+          location: formatLocation(yamlEvent.location),
+          twitterUrl: yamlEvent.social?.twitter,
+        }
+
+        events.push(event)
+      } catch (error) {
+        console.error(`Error parsing event file: ${filePath}`, error)
+        continue
+      }
+    }
+  }
+
+  // Sort by start date
+  return events.sort((a, b) => a.startDate.localeCompare(b.startDate))
+}
+
+/**
+ * Gets a single event by ID
+ */
+export async function getEventById(id: string): Promise<CalendarEvent | undefined> {
+  const events = await loadEvents()
+  return events.find((event) => event.id === id)
+}

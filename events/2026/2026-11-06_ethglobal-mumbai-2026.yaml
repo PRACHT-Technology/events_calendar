@@ -1,0 +1,23 @@
+title: ETHGlobal Mumbai 2026
+startDate: "2026-11-06"
+endDate: "2026-11-08"
+url: https://ethglobal.com/events/mumbai
+
+description: >
+  36-hour IRL hackathon directly after Devcon
+
+type: hackathon
+categories:
+  - ethereum
+
+location:
+  city: Mumbai
+  country: India
+  continent: asia
+
+attendance: "800+"
+
+social:
+  twitter: https://x.com/ethglobal
+  discord: https://ethglobal.com/discord
+  farcaster: https://farcaster.xyz/ethglobal

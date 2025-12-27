@@ -1,0 +1,21 @@
+title: Web Summit 2026
+startDate: "2026-11-09"
+endDate: "2026-11-12"
+url: https://websummit.com
+
+description: >
+  Europes largest tech conference with Web3/blockchain track
+
+type: conference
+categories:
+  - web3
+
+location:
+  city: Lisbon
+  country: Portugal
+  continent: europe
+
+attendance: "15000+"
+
+social:
+  twitter: https://x.com/WebSummit
