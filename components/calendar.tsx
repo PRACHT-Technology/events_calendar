@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { ChevronLeft, ChevronRight, CalendarDays, List, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, CalendarDays, List, Search, MapPin, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { CalendarEvent } from "@/types/event"
@@ -11,6 +11,8 @@ import { EventPopover } from "@/components/event-popover"
 import { MiniCalendar } from "@/components/mini-calendar"
 import { EventList } from "@/components/event-list"
 import { SearchCommand } from "@/components/search-command"
+import { EventFilter } from "@/components/event-filter"
+import { filterEvents, getLocationOptions, getTypeOptions, type EventFilters } from "@/lib/filters"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -47,7 +49,18 @@ export function Calendar({ events = [] }: CalendarProps) {
   const [displayMode, setDisplayMode] = useState<DisplayMode>("list")
   const [searchOpen, setSearchOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
+  const [locationFilter, setLocationFilter] = useState<string[]>([])
+  const [typeFilter, setTypeFilter] = useState<string[]>([])
   const isMobile = useIsMobile()
+
+  // Filter options derived from events data
+  const locationOptions = useMemo(() => getLocationOptions(events), [events])
+  const typeOptions = useMemo(() => getTypeOptions(), [])
+
+  // Apply filters to events
+  const filteredEvents = useMemo(() => {
+    return filterEvents(events, { locations: locationFilter, types: typeFilter })
+  }, [events, locationFilter, typeFilter])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -83,7 +96,7 @@ export function Calendar({ events = [] }: CalendarProps) {
   }, [currentMonth, effectiveViewMode])
 
   const getEventsForDay = (day: Date): CalendarEvent[] => {
-    return events.filter((event) => {
+    return filteredEvents.filter((event) => {
       const startDate = parseISO(event.startDate)
       const endDate = event.endDate ? parseISO(event.endDate) : startDate
       if (isSameDay(day, startDate) || isSameDay(day, endDate)) return true
@@ -144,7 +157,7 @@ export function Calendar({ events = [] }: CalendarProps) {
               variant="ghost"
               size="icon"
               onClick={() => setSearchOpen(true)}
-              className="h-7 w-7 md:h-8 md:w-8 mr-1"
+              className="h-7 w-7 md:h-8 md:w-8"
             >
               <Search className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </Button>
@@ -153,7 +166,7 @@ export function Calendar({ events = [] }: CalendarProps) {
               variant="outline"
               size="sm"
               onClick={() => setSearchOpen(true)}
-              className="h-7 md:h-8 px-2 md:px-3 text-xs mr-1 md:mr-2 gap-1.5"
+              className="h-7 md:h-8 px-2 md:px-3 text-xs gap-1.5 bg-transparent"
             >
               <Search className="h-3.5 w-3.5 text-muted-foreground" />
               <span>Search</span>
@@ -162,6 +175,23 @@ export function Calendar({ events = [] }: CalendarProps) {
               </kbd>
             </Button>
           )}
+
+          <EventFilter
+            label="Location"
+            icon={<MapPin className="h-3.5 w-3.5" />}
+            options={locationOptions}
+            selected={locationFilter}
+            onSelectionChange={setLocationFilter}
+            grouped
+          />
+
+          <EventFilter
+            label="Type"
+            icon={<Tag className="h-3.5 w-3.5" />}
+            options={typeOptions}
+            selected={typeFilter}
+            onSelectionChange={setTypeFilter}
+          />
 
           <div className="flex border border-border rounded-md overflow-hidden mr-1 md:mr-2">
             <Button
@@ -223,7 +253,7 @@ export function Calendar({ events = [] }: CalendarProps) {
             transition={{ duration: 0.15 }}
             className="flex-1"
           >
-            <EventList events={events} />
+            <EventList events={filteredEvents} />
           </motion.div>
         ) : effectiveViewMode === "1M" ? (
           <motion.div
@@ -328,7 +358,7 @@ export function Calendar({ events = [] }: CalendarProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.15, delay: idx * 0.03 }}
               >
-                <MiniCalendar month={month} events={events} compact={effectiveViewMode === "6M" || isMobile} />
+                <MiniCalendar month={month} events={filteredEvents} compact={effectiveViewMode === "6M" || isMobile} />
               </motion.div>
             ))}
           </motion.div>
@@ -336,7 +366,7 @@ export function Calendar({ events = [] }: CalendarProps) {
       </AnimatePresence>
 
       <SearchCommand
-        events={events}
+        events={filteredEvents}
         open={searchOpen}
         onOpenChange={setSearchOpen}
         onSelectEvent={(event) => {
