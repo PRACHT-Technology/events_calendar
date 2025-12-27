@@ -15,6 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { searchEvents, hasResults, type GroupedSearchResults } from "@/lib/search"
 import type { CalendarEvent } from "@/types/event"
+import { eventTypeColors } from "@/lib/event-schema"
 
 interface SearchCommandProps {
   events: CalendarEvent[]
@@ -52,7 +53,7 @@ function SearchResultItem({
     >
       <div
         className="w-2 h-2 rounded-full shrink-0"
-        style={{ backgroundColor: event.color || "#3b82f6" }}
+        style={{ backgroundColor: event.type ? eventTypeColors[event.type] || "#6b7280" : "#6b7280" }}
       />
       <div className="flex-1 min-w-0">
         <div className="font-medium truncate text-xs">{event.title}</div>

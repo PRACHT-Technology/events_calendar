@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { parse } from "yaml"
-import { eventSchema, categoryColors, DEFAULT_COLOR, type YAMLEvent } from "./event-schema"
+import { eventSchema, type YAMLEvent } from "./event-schema"
 import type { CalendarEvent } from "@/types/event"
 
 /**
@@ -19,21 +19,6 @@ function formatLocation(location?: YAMLEvent["location"]): string | undefined {
   if (!location) return undefined
   const parts = [location.venue, location.city, location.country].filter(Boolean)
   return parts.length > 0 ? parts.join(", ") : undefined
-}
-
-/**
- * Resolves color from explicit color, category, or default
- */
-function resolveColor(event: YAMLEvent): string {
-  // Explicit color takes priority
-  if (event.color) return event.color
-
-  // Use primary category color
-  if (event.categories && event.categories.length > 0) {
-    return categoryColors[event.categories[0]] || DEFAULT_COLOR
-  }
-
-  return DEFAULT_COLOR
 }
 
 /**
@@ -86,7 +71,6 @@ export async function loadEvents(): Promise<CalendarEvent[]> {
           endDate: yamlEvent.endDate,
           description: yamlEvent.description,
           url: yamlEvent.url,
-          color: resolveColor(yamlEvent),
           location: formatLocation(yamlEvent.location),
           twitterUrl: yamlEvent.social?.twitter,
 

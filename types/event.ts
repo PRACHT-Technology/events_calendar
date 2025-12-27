@@ -5,7 +5,6 @@ export interface CalendarEvent {
   endDate?: string // ISO date string for multi-day events
   description?: string
   url: string // link to event homepage
-  color?: string // optional accent color
   location?: string // formatted string for display
   twitterUrl?: string
 

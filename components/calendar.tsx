@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight, CalendarDays, List, Search } from "lucide-re
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { CalendarEvent } from "@/types/event"
+import { eventTypeColors } from "@/lib/event-schema"
+import { Badge } from "@/components/ui/badge"
 import { EventPopover } from "@/components/event-popover"
 import { MiniCalendar } from "@/components/mini-calendar"
 import { EventList } from "@/components/event-list"
@@ -282,13 +284,15 @@ export function Calendar({ events = [] }: CalendarProps) {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.1 }}
-                          className="w-full text-left text-[10px] px-1 py-0.5 rounded truncate transition-colors cursor-pointer"
-                          style={{
-                            backgroundColor: `${event.color || "#3b82f6"}20`,
-                            color: event.color || "#3b82f6",
-                          }}
+                          className="w-full text-left text-[10px] px-1 py-0.5 rounded truncate transition-colors cursor-pointer bg-muted/50 hover:bg-muted flex items-center gap-1"
                         >
-                          {event.title}
+                          {event.type && (
+                            <span
+                              className="flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: eventTypeColors[event.type] || "#6b7280" }}
+                            />
+                          )}
+                          <span className="truncate">{event.title}</span>
                         </motion.button>
                       ))}
                       {dayEvents.length > (isMobile ? 1 : 2) && (

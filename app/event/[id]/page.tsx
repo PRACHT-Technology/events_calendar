@@ -3,6 +3,8 @@ import Link from "next/link"
 import { format, parseISO } from "date-fns"
 import { ArrowLeft, ExternalLink, MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { eventTypeColors } from "@/lib/event-schema"
 import type { Metadata } from "next"
 
 import { getEventById, loadEvents } from "@/lib/events"
@@ -94,11 +96,22 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
           Back to Calendar
         </Link>
 
-        {/* Color bar */}
-        <div className="w-full h-2 rounded-full mb-6" style={{ backgroundColor: event.color || "#3b82f6" }} />
-
         {/* Event title */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">{event.title}</h1>
+        <div className="flex items-center gap-3 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold">{event.title}</h1>
+          {event.type && (
+            <Badge
+              variant="outline"
+              className="text-sm px-2 py-0.5"
+              style={{
+                borderColor: eventTypeColors[event.type] || "#6b7280",
+                color: eventTypeColors[event.type] || "#6b7280",
+              }}
+            >
+              {event.type}
+            </Badge>
+          )}
+        </div>
 
         {/* Event meta */}
         <div className="flex flex-col gap-2 mb-6 text-muted-foreground">

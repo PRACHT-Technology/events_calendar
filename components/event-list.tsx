@@ -8,6 +8,7 @@ import { ExternalLink, Copy, Check } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import type { CalendarEvent } from "@/types/event"
+import { eventTypeColors } from "@/lib/event-schema"
 import { cn } from "@/lib/utils"
 import { EventPopover } from "@/components/event-popover"
 
@@ -138,11 +139,19 @@ export function EventList({ events }: EventListProps) {
                               )}
                             >
                               <div className="flex items-center gap-2 min-w-0">
-                                <div
-                                  className="w-2 h-2 rounded-full flex-shrink-0"
-                                  style={{ backgroundColor: event.color || "#3b82f6" }}
-                                />
                                 <span className="truncate font-medium">{event.title}</span>
+                                {event.type && (
+                                  <Badge
+                                    variant="outline"
+                                    className="text-[9px] px-1.5 py-0 h-4 flex-shrink-0"
+                                    style={{
+                                      borderColor: eventTypeColors[event.type] || "#6b7280",
+                                      color: eventTypeColors[event.type] || "#6b7280",
+                                    }}
+                                  >
+                                    {event.type}
+                                  </Badge>
+                                )}
                               </div>
                               <span className="text-muted-foreground whitespace-nowrap">
                                 {formatDateCompact(event.startDate, event.endDate)}
@@ -195,11 +204,19 @@ export function EventList({ events }: EventListProps) {
                             >
                               {/* Row 1: Event name */}
                               <div className="flex items-center gap-2">
-                                <div
-                                  className="w-2 h-2 rounded-full flex-shrink-0"
-                                  style={{ backgroundColor: event.color || "#3b82f6" }}
-                                />
                                 <span className="font-medium">{event.title}</span>
+                                {event.type && (
+                                  <Badge
+                                    variant="outline"
+                                    className="text-[9px] px-1.5 py-0 h-4 flex-shrink-0"
+                                    style={{
+                                      borderColor: eventTypeColors[event.type] || "#6b7280",
+                                      color: eventTypeColors[event.type] || "#6b7280",
+                                    }}
+                                  >
+                                    {event.type}
+                                  </Badge>
+                                )}
                               </div>
                               {/* Row 2: Date, Location, Links */}
                               <div className="flex items-center justify-between pl-4">

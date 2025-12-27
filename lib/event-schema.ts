@@ -38,23 +38,16 @@ export const continents = [
   "global",
 ] as const
 
-// Category to color mapping
-export const categoryColors: Record<string, string> = {
-  ethereum: "#627EEA",
-  solana: "#14F195",
-  bitcoin: "#F7931A",
-  blockchain: "#3B82F6",
-  ai: "#8B5CF6",
-  defi: "#10B981",
-  privacy: "#6366F1",
-  institutional: "#0EA5E9",
-  developer: "#F59E0B",
-  zk: "#EC4899",
-  web3: "#06B6D4",
-  rwa: "#84CC16",
+// Event type to color mapping
+export const eventTypeColors: Record<string, string> = {
+  conference: "#3B82F6",      // Blue
+  hackathon: "#8B5CF6",       // Purple
+  meetup: "#10B981",          // Green
+  "popup-village": "#F59E0B", // Amber
+  festival: "#EC4899",        // Pink
+  workshop: "#06B6D4",        // Cyan
+  summit: "#6366F1",          // Indigo
 }
-
-export const DEFAULT_COLOR = "#3B82F6"
 
 // Location schema
 const locationSchema = z
@@ -92,10 +85,6 @@ export const eventSchema = z
     description: z.string().max(500).optional(),
     type: z.enum(eventTypes).optional(),
     categories: z.array(z.enum(categories)).optional(),
-    color: z
-      .string()
-      .regex(/^#[0-9A-Fa-f]{6}$/, "Color must be hex format #RRGGBB")
-      .optional(),
     location: locationSchema,
     attendance: z.string().optional(),
     social: socialSchema,

@@ -5,6 +5,8 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import type { CalendarEvent } from "@/types/event"
+import { eventTypeColors } from "@/lib/event-schema"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, X, MapPin, Calendar, ArrowRight } from "lucide-react"
 import { format, parseISO } from "date-fns"
@@ -87,11 +89,22 @@ export function EventPopover({ event, children, open = false, onOpenChange }: Ev
               </button>
 
               <div className="flex flex-col gap-4 pr-6">
-                {/* Color bar */}
-                <div className="w-full h-1.5 rounded-full" style={{ backgroundColor: event.color || "#3b82f6" }} />
-
                 <div>
-                  <h3 className="font-semibold text-lg">{event.title}</h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-semibold text-lg">{event.title}</h3>
+                    {event.type && (
+                      <Badge
+                        variant="outline"
+                        className="text-[10px] px-1.5 py-0 h-5"
+                        style={{
+                          borderColor: eventTypeColors[event.type] || "#6b7280",
+                          color: eventTypeColors[event.type] || "#6b7280",
+                        }}
+                      >
+                        {event.type}
+                      </Badge>
+                    )}
+                  </div>
                   <div className="flex flex-col gap-1.5 mt-3">
                     <span className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Calendar className="h-4 w-4" />

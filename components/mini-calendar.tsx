@@ -1,6 +1,7 @@
 "use client"
 
 import type { CalendarEvent } from "@/types/event"
+import { eventTypeColors } from "@/lib/event-schema"
 import { EventPopover } from "@/components/event-popover"
 import { motion } from "framer-motion"
 import {
@@ -97,7 +98,7 @@ export function MiniCalendar({ month, events, compact = false }: MiniCalendarPro
                         whileHover={{ scale: 1.5 }}
                         whileTap={{ scale: 0.9 }}
                         className={`rounded-full transition-transform ${compact ? "w-1 h-1" : "w-1.5 h-1.5"}`}
-                        style={{ backgroundColor: event.color || "#3b82f6" }}
+                        style={{ backgroundColor: event.type ? eventTypeColors[event.type] || "#6b7280" : "#6b7280" }}
                       />
                     </EventPopover>
                   ))}

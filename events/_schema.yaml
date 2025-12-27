@@ -64,7 +64,7 @@ optional:
 
   categories:
     type: array of strings
-    description: Event categories (first is primary, determines color)
+    description: Event categories for filtering and search
     allowed_values:
       - ethereum
       - solana
@@ -79,12 +79,6 @@ optional:
       - web3
       - rwa
     example: ["ethereum", "defi"]
-
-  color:
-    type: string
-    format: hex (#RRGGBB)
-    description: Custom color override (defaults to primary category color)
-    example: "#627EEA"
 
   location:
     type: object
@@ -147,25 +141,6 @@ optional:
     description: Additional searchable keywords
     max_items: 10
     example: ["buidlathon", "hackathon", "builders"]
-
-# ============================================
-# CATEGORY COLOR MAPPING
-# ============================================
-# Colors are auto-assigned based on primary category
-
-category_colors:
-  ethereum: "#627EEA"
-  solana: "#14F195"
-  bitcoin: "#F7931A"
-  blockchain: "#3B82F6"
-  ai: "#8B5CF6"
-  defi: "#10B981"
-  privacy: "#6366F1"
-  institutional: "#0EA5E9"
-  developer: "#F59E0B"
-  zk: "#EC4899"
-  web3: "#06B6D4"
-  rwa: "#84CC16"
 
 # ============================================
 # EXAMPLE: FULL EVENT FILE
