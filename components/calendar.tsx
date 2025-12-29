@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { ChevronLeft, ChevronRight, CalendarDays, List, Search, MapPin, Layers, Tag } from "lucide-react"
+import { ChevronLeft, ChevronRight, CalendarDays, List, Search, MapPin, Layers, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { CalendarEvent } from "@/types/event"
@@ -10,8 +10,9 @@ import { MiniCalendar } from "@/components/mini-calendar"
 import { EventList } from "@/components/event-list"
 import { SearchCommand } from "@/components/search-command"
 import { EventFilter } from "@/components/event-filter"
-import { filterEvents, getLocationOptions, getCategoryOptions, getTagOptions, type EventFilters } from "@/lib/filters"
+import { filterEvents, getLocationOptions, getCategoryOptions, hasActiveFilters } from "@/lib/filters"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { useFilterParams } from "@/hooks/use-filter-params"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   startOfMonth,
@@ -48,24 +49,26 @@ export function Calendar({ events = [] }: CalendarProps) {
   const [displayMode, setDisplayMode] = useState<DisplayMode>("list")
   const [searchOpen, setSearchOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
-  const [locationFilter, setLocationFilter] = useState<string[]>([])
-  const [categoryFilter, setCategoryFilter] = useState<string[]>([])
-  const [tagFilter, setTagFilter] = useState<string[]>([])
+  const {
+    locationFilter,
+    categoryFilter,
+    setLocationFilter,
+    setCategoryFilter,
+    clearAllFilters,
+  } = useFilterParams()
   const isMobile = useIsMobile()
 
   // Filter options derived from events data
   const locationOptions = useMemo(() => getLocationOptions(events), [events])
   const categoryOptions = useMemo(() => getCategoryOptions(), [])
-  const tagOptions = useMemo(() => getTagOptions(events), [events])
 
   // Apply filters to events
   const filteredEvents = useMemo(() => {
     return filterEvents(events, {
       locations: locationFilter,
       categories: categoryFilter,
-      tags: tagFilter,
     })
-  }, [events, locationFilter, categoryFilter, tagFilter])
+  }, [events, locationFilter, categoryFilter])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -198,13 +201,17 @@ export function Calendar({ events = [] }: CalendarProps) {
             onSelectionChange={setCategoryFilter}
           />
 
-          <EventFilter
-            label="Tags"
-            icon={<Tag className="h-3.5 w-3.5" />}
-            options={tagOptions}
-            selected={tagFilter}
-            onSelectionChange={setTagFilter}
-          />
+          {hasActiveFilters({ locations: locationFilter, categories: categoryFilter }) && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearAllFilters}
+              className="h-7 md:h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3.5 w-3.5" />
+              <span className="hidden md:inline ml-1">Clear</span>
+            </Button>
+          )}
 
           <div className="flex border border-border rounded-md overflow-hidden mr-1 md:mr-2">
             <Button

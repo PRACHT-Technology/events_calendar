@@ -81,7 +81,6 @@ export const eventSchema = z
     categories: z.array(z.enum(categories)).max(2).optional(),
     location: locationSchema,
     social: socialSchema,
-    tags: z.array(z.string().max(50)).max(10).optional(),
   })
   .refine(
     (data) => {

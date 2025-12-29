@@ -10,7 +10,6 @@ export interface FilterOption {
 export interface EventFilters {
   locations: string[]
   categories: string[]
-  tags: string[]
 }
 
 const continentLabels: Record<string, string> = {
@@ -27,9 +26,9 @@ export function filterEvents(
   events: CalendarEvent[],
   filters: EventFilters
 ): CalendarEvent[] {
-  const { locations, categories: categoryFilters, tags: tagFilters } = filters
+  const { locations, categories: categoryFilters } = filters
 
-  if (locations.length === 0 && categoryFilters.length === 0 && tagFilters.length === 0) {
+  if (locations.length === 0 && categoryFilters.length === 0) {
     return events
   }
 
@@ -47,14 +46,6 @@ export function filterEvents(
     if (categoryFilters.length > 0) {
       const matchesCategory = event.categories?.some(cat => categoryFilters.includes(cat))
       if (!matchesCategory) {
-        return false
-      }
-    }
-
-    // Tag filter (OR logic within tags)
-    if (tagFilters.length > 0) {
-      const matchesTag = event.tags?.some(tag => tagFilters.includes(tag))
-      if (!matchesTag) {
         return false
       }
     }
@@ -110,25 +101,7 @@ export function getCategoryOptions(): FilterOption[] {
   }))
 }
 
-export function getTagOptions(events: CalendarEvent[]): FilterOption[] {
-  const tagSet = new Set<string>()
-
-  for (const event of events) {
-    if (event.tags) {
-      event.tags.forEach(tag => tagSet.add(tag))
-    }
-  }
-
-  return Array.from(tagSet)
-    .sort((a, b) => a.localeCompare(b))
-    .map(tag => ({
-      value: tag,
-      label: tag,
-    }))
-}
-
 export function hasActiveFilters(filters: EventFilters): boolean {
   return filters.locations.length > 0 ||
-         filters.categories.length > 0 ||
-         filters.tags.length > 0
+         filters.categories.length > 0
 }

@@ -5,13 +5,9 @@ url: "https://www.buidleurope.com/"
 description: "Builder-focused technical conference with workshops on smart contracts Layer-2 security and zero-knowledge cryptography\n"
 categories:
   - "conference"
-  - "hackathon"
 location:
   city: "Lisbon"
   country: "Portugal"
   continent: "europe"
 social:
   twitter: "https://x.com/ekang426"
-tags:
-  - "ethereum"
-  - "developer"

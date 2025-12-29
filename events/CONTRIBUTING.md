@@ -55,10 +55,6 @@ categories:                    # Event format (1-2 max)
   - conference
   - hackathon
 
-tags:                          # Topic tags
-  - ethereum
-  - defi
-
 location:
   venue: National Western Complex
   city: Denver
@@ -80,13 +76,6 @@ Event format (use 1-2):
 - `meetup` - casual networking
 - `coworking` - shared workspace
 - `popup-village` - multi-week co-living (Zuzalu-style)
-
-### Tags
-
-Topic tags (use 1-3):
-- `ethereum`, `solana`, `bitcoin`, `blockchain`
-- `ai`, `defi`, `privacy`, `zk`
-- `institutional`, `developer`, `web3`, `rwa`
 
 ### Continents
 
@@ -117,9 +106,6 @@ categories:
   - conference
   - hackathon
 
-tags:
-  - ethereum
-
 location:
   venue: National Western Complex
   city: Denver
@@ -141,9 +127,6 @@ url: https://luma.com/event/xyz
 categories:
   - meetup
 
-tags:
-  - ethereum
-
 location:
   city: Lisbon
   country: Portugal
@@ -163,10 +146,6 @@ description: The largest DeFi hackathon with async virtual format.
 categories:
   - hackathon
 
-tags:
-  - ethereum
-  - defi
-
 location:
   city: Online
   country: Online
@@ -185,10 +164,6 @@ description: Month-long Web3 festival and popup village in scenic Turkish coasta
 
 categories:
   - popup-village
-
-tags:
-  - web3
-  - zk
 
 location:
   city: Kaş

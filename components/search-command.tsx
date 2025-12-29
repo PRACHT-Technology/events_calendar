@@ -44,7 +44,7 @@ function SearchResultItem({
   event: CalendarEvent
   matchedField: string
   matchedValue?: string
-  matchType: "name" | "location" | "category" | "tag" | "other"
+  matchType: "name" | "location" | "category" | "other"
   onSelect: () => void
 }) {
   const getBadgeStyle = () => {
@@ -192,25 +192,6 @@ export function SearchCommand({
 
           {showResults &&
             (results.byName.length > 0 || results.byLocation.length > 0 || results.byCategory.length > 0) &&
-            results.byTag.length > 0 && <CommandSeparator />}
-
-          {showResults && results.byTag.length > 0 && (
-            <CommandGroup heading="Events by Tag">
-              {results.byTag.map((result) => (
-                <SearchResultItem
-                  key={result.event.id}
-                  event={result.event}
-                  matchedField={result.matchedField}
-                  matchedValue={result.matchedValue}
-                  matchType={result.matchType}
-                  onSelect={() => handleSelect(result.event)}
-                />
-              ))}
-            </CommandGroup>
-          )}
-
-          {showResults &&
-            (results.byName.length > 0 || results.byLocation.length > 0 || results.byCategory.length > 0 || results.byTag.length > 0) &&
             results.byOther.length > 0 && <CommandSeparator />}
 
           {showResults && results.byOther.length > 0 && (

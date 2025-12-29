@@ -20,6 +20,5 @@ export interface CalendarEvent {
   farcasterUrl?: string
 
   // Searchable metadata
-  categories?: string[] // ["ethereum", "defi", ...] - max 2
-  tags?: string[] // custom tags - 1 or more
+  categories?: string[] // event format: conference, hackathon, meetup, coworking, popup-village (max 2)
 }

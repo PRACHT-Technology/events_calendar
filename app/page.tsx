@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { Calendar } from "@/components/calendar"
 import { loadEvents } from "@/lib/events"
 import { JsonLd, generateWebsiteJsonLd, generateEventsListJsonLd } from "@/lib/structured-data"
@@ -24,8 +25,10 @@ export default async function Page() {
   return (
     <>
       <JsonLd data={jsonLdData} />
-      <main className="p-4 md:p-6 lg:p-12">
-        <Calendar events={events} />
+      <main className="px-4 pt-10 pb-4 md:p-6 lg:p-12">
+        <Suspense>
+          <Calendar events={events} />
+        </Suspense>
       </main>
     </>
   )

@@ -87,7 +87,6 @@ export async function loadEvents(): Promise<CalendarEvent[]> {
 
           // Searchable metadata
           categories: yamlEvent.categories,
-          tags: yamlEvent.tags,
         }
 
         events.push(event)

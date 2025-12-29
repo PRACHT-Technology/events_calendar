@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { format, parseISO } from "date-fns"
-import { ArrowLeft, ExternalLink, MapPin, Calendar, Globe, Building2, Tag } from "lucide-react"
+import { ArrowLeft, ExternalLink, MapPin, Calendar, Globe, Building2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -121,13 +121,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
 
   const hasSocialLinks = event.twitterUrl || event.telegramUrl || event.discordUrl || event.farcasterUrl
   const hasCategories = event.categories && event.categories.length > 0
-  const hasTags = event.tags && event.tags.length > 0
 
   return (
     <>
       <JsonLd data={jsonLdData} />
       <main className="h-full p-4 md:p-6 lg:p-12">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Back button */}
           <Link
             href="/"
@@ -197,23 +196,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
               </div>
             )}
           </div>
-
-          {/* Tags */}
-          {hasTags && (
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <Tag className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm font-medium text-muted-foreground">Tags</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {event.tags!.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Description */}
           {event.description && (

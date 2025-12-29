@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import type { CalendarEvent } from "@/types/event"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, X, MapPin, Calendar, ArrowRight, Tag } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { ExternalLink, X, MapPin, Calendar, ArrowRight } from "lucide-react"
 import { format, parseISO } from "date-fns"
 
 function XIcon({ className }: { className?: string }) {
@@ -106,17 +105,6 @@ export function EventPopover({ event, children, open = false, onOpenChange }: Ev
 
                 {event.description && (
                   <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
-                )}
-
-                {event.tags && event.tags.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <Tag className="h-3.5 w-3.5 text-muted-foreground flex-shrink-0" />
-                    {event.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-[10px] px-1.5 py-0 h-5">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
                 )}
 
                 <div className="flex flex-col gap-2 mt-2">

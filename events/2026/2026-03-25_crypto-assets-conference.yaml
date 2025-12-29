@@ -8,6 +8,3 @@ location:
   city: "Frankfurt"
   country: "Germany"
   continent: "europe"
-tags:
-  - "institutional"
-  - "blockchain"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import "./globals.css";
 import { Footer } from "@/components/footer";
 
@@ -49,12 +50,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontSans.variable}>
       <body className="antialiased h-screen overflow-hidden">
-        <div className="flex flex-col h-full">
-          <div className="flex-1 overflow-y-auto">
-            {children}
+        <NuqsAdapter>
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              {children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </NuqsAdapter>
       </body>
     </html>
   );
