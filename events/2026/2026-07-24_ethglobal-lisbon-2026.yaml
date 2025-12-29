@@ -4,7 +4,6 @@ endDate: "2026-07-26"
 url: "https://ethglobal.com/events/lisbon2026"
 description: "36-hour IRL hackathon as part of Onchain Lisbon week\n"
 categories:
-  - "conference"
   - "hackathon"
 location:
   city: "Lisbon"
