@@ -1,22 +1,16 @@
-title: Pragma New York 2026
+title: "Pragma New York 2026"
 startDate: "2026-06-11"
-url: https://ethglobal.com/events/pragma-newyork2026
-
-description: >
-  One-day ETHGlobal summit preceding New York hackathon
-
-type: conference
+url: "https://ethglobal.com/events/pragma-newyork2026"
+description: "One-day ETHGlobal summit preceding New York hackathon\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: New York City
-  country: USA
-  continent: north-america
-
-attendance: "1000+"
-
+  city: "New York City"
+  country: "USA"
+  continent: "north-america"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

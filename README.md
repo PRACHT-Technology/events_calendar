@@ -77,7 +77,6 @@ We welcome contributions from the community! There are several ways to help:
    description: >
      Brief description of the event (1-2 sentences).
 
-   type: conference             # conference, hackathon, meetup, summit, workshop, festival
    categories:
      - ethereum                 # Primary category (determines color)
      - defi                     # Additional categories
@@ -86,8 +85,6 @@ We welcome contributions from the community! There are several ways to help:
      city: Berlin
      country: Germany
      continent: europe          # africa, asia, europe, north-america, south-america, oceania, global
-
-   attendance: "1000+"          # Optional
 
    social:                      # Optional
      twitter: https://x.com/eventhandle

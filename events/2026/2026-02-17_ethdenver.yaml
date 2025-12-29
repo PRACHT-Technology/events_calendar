@@ -1,22 +1,17 @@
-title: ETHDenver
+title: "ETHDenver"
 startDate: "2026-02-17"
 endDate: "2026-02-21"
-url: https://ethdenver.com/
-
-description: >
-  Worlds largest Ethereum BUIDLathon with 25000+ innovators from 125+ countries
-
-type: conference
+url: "https://ethdenver.com/"
+description: "Worlds largest Ethereum BUIDLathon with 25000+ innovators from 125+ countries\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Denver
-  country: USA
-  continent: north-america
-
-attendance: "25000+"
-
+  city: "Denver"
+  country: "USA"
+  continent: "north-america"
 social:
-  twitter: https://x.com/ethereumdenver
-  telegram: https://t.me/Ethdenver
+  twitter: "https://x.com/ethereumdenver"
+  telegram: "https://t.me/Ethdenver"
+tags:
+  - "ethereum"

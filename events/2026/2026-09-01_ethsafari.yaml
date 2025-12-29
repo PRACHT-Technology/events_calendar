@@ -1,23 +1,18 @@
-title: ETHSafari
+title: "ETHSafari"
 startDate: "2026-09-01"
 endDate: "2026-09-06"
-url: https://ethsafari.xyz
-
-description: >
-  Unique event blending blockchain with Kenyas wildlife. Includes hackathon bootcamp and train journey
-
-type: festival
+url: "https://ethsafari.xyz"
+description: "Unique event blending blockchain with Kenyas wildlife. Includes hackathon bootcamp and train journey\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Kilifi
-  country: Kenya
-  continent: africa
-
-attendance: "2000+"
-
+  city: "Kilifi"
+  country: "Kenya"
+  continent: "africa"
 social:
-  twitter: https://x.com/ETHSafari
-  telegram: https://t.me/ethsafari
-  discord: https://discord.com/invite/CkMF5Ff83f
+  twitter: "https://x.com/ETHSafari"
+  telegram: "https://t.me/ethsafari"
+  discord: "https://discord.com/invite/CkMF5Ff83f"
+tags:
+  - "ethereum"

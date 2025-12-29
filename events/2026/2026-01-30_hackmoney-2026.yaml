@@ -1,23 +1,18 @@
-title: HackMoney 2026
+title: "HackMoney 2026"
 startDate: "2026-01-30"
 endDate: "2026-02-11"
-url: https://ethglobal.com/events/hackmoney2026
-
-description: >
-  The largest DeFi hackathon with async virtual format
-
-type: hackathon
+url: "https://ethglobal.com/events/hackmoney2026"
+description: "The largest DeFi hackathon with async virtual format\n"
 categories:
-  - ethereum
-
+  - "hackathon"
 location:
-  city: Online
-  country: Online
-  continent: global
-
-attendance: "5000+"
-
+  city: "Online"
+  country: "Online"
+  continent: "global"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"
+  - "defi"

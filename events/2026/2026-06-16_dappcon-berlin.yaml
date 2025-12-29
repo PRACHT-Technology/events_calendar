@@ -1,23 +1,18 @@
-title: DappCon Berlin
+title: "DappCon Berlin"
 startDate: "2026-06-16"
 endDate: "2026-06-17"
-url: https://www.dappcon.io/
-
-description: >
-  Conference focused on decentralized applications at Radialsystem
-
-type: conference
+url: "https://www.dappcon.io/"
+description: "Conference focused on decentralized applications at Radialsystem\n"
 categories:
-  - ethereum
-
+  - "conference"
 location:
-  city: Berlin
-  country: Germany
-  continent: europe
-
-attendance: "1500+"
-
+  city: "Berlin"
+  country: "Germany"
+  continent: "europe"
 social:
-  twitter: https://x.com/dappconberlin
-  telegram: https://t.me/+ZYUWnz0kxWo4NTMy
-  farcaster: https://farcaster.xyz/~/channel/dappconberlin
+  twitter: "https://x.com/dappconberlin"
+  telegram: "https://t.me/+ZYUWnz0kxWo4NTMy"
+  farcaster: "https://farcaster.xyz/~/channel/dappconberlin"
+tags:
+  - "ethereum"
+  - "developer"

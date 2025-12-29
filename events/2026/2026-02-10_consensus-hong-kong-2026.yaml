@@ -1,23 +1,17 @@
-title: Consensus Hong Kong 2026
+title: "Consensus Hong Kong 2026"
 startDate: "2026-02-10"
 endDate: "2026-02-12"
-url: https://consensus-hongkong.coindesk.com/
-
-description: >
-  Asias leading Web3 conference with 15000+ attendees 500+ speakers including Consensus Hackathon and PitchFest
-
-type: conference
+url: "https://consensus-hongkong.coindesk.com/"
+description: "Asias leading Web3 conference with 15000+ attendees 500+ speakers including Consensus Hackathon and PitchFest\n"
 categories:
-  - institutional
-  - blockchain
-
+  - "conference"
 location:
-  city: Hong Kong
-  country: Hong Kong SAR
-  continent: asia
-
-attendance: "15000+"
-
+  city: "Hong Kong"
+  country: "Hong Kong SAR"
+  continent: "asia"
 social:
-  twitter: https://x.com/consensus_hk
-  telegram: https://t.me/consensusbycoindesk
+  twitter: "https://x.com/consensus_hk"
+  telegram: "https://t.me/consensusbycoindesk"
+tags:
+  - "institutional"
+  - "blockchain"

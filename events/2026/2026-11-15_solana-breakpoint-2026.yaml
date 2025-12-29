@@ -1,22 +1,16 @@
-title: Solana Breakpoint 2026
+title: "Solana Breakpoint 2026"
 startDate: "2026-11-15"
 endDate: "2026-11-17"
-url: https://solana.com/breakpoint
-
-description: >
-  Solana flagship annual conference at Olympia Convention Centre. Founders developers and creators discuss high-performance Web3 innovations
-
-type: conference
+url: "https://solana.com/breakpoint"
+description: "Solana flagship annual conference at Olympia Convention Centre. Founders developers and creators discuss high-performance Web3 innovations\n"
 categories:
-  - solana
-
+  - "conference"
 location:
-  city: London
-  country: United Kingdom
-  continent: europe
-
-attendance: "10000+"
-
+  city: "London"
+  country: "United Kingdom"
+  continent: "europe"
 social:
-  twitter: https://x.com/SolanaConf
-  telegram: https://t.me/solana
+  twitter: "https://x.com/SolanaConf"
+  telegram: "https://t.me/solana"
+tags:
+  - "solana"

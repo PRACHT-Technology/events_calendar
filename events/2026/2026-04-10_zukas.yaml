@@ -1,22 +1,17 @@
-title: ZuKas
+title: "ZuKas"
 startDate: "2026-04-10"
 endDate: "2026-05-10"
-url: https://www.zukas.city/
-
-description: >
-  Month-long Web3 festival and popup village in scenic Turkish coastal town
-
-type: popup-village
+url: "https://www.zukas.city/"
+description: "Month-long Web3 festival and popup village in scenic Turkish coastal town\n"
 categories:
-  - web3
-
+  - "popup-village"
 location:
-  city: Kaş
-  country: Turkey
-  continent: europe
-
-attendance: "2000+"
-
+  city: "Kaş"
+  country: "Turkey"
+  continent: "europe"
 social:
-  twitter: https://x.com/zuzalukas
-  telegram: https://t.me/zuzalukas
+  twitter: "https://x.com/zuzalukas"
+  telegram: "https://t.me/zuzalukas"
+tags:
+  - "web3"
+  - "zk"

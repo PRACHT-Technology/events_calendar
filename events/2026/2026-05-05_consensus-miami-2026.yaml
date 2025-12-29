@@ -1,22 +1,16 @@
-title: Consensus Miami 2026
+title: "Consensus Miami 2026"
 startDate: "2026-05-05"
 endDate: "2026-05-07"
-url: https://consensus.coindesk.com
-
-description: >
-  Largest crypto conference in the Americas with Consensus Hackathon and PitchFest
-
-type: conference
+url: "https://consensus.coindesk.com"
+description: "Largest crypto conference in the Americas with Consensus Hackathon and PitchFest\n"
 categories:
-  - institutional
-  - blockchain
-
+  - "conference"
 location:
-  city: Miami
-  country: USA
-  continent: north-america
-
-attendance: "20000+"
-
+  city: "Miami"
+  country: "USA"
+  continent: "north-america"
 social:
-  twitter: https://x.com/consensus_events
+  twitter: "https://x.com/consensus_events"
+tags:
+  - "institutional"
+  - "blockchain"

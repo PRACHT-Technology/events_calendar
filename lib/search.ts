@@ -2,27 +2,34 @@ import type { CalendarEvent } from "@/types/event"
 
 export interface SearchResult {
   event: CalendarEvent
-  matchType: "name" | "location" | "other"
+  matchType: "name" | "location" | "category" | "tag" | "other"
   score: number
-  matchedField: string // "title", "city", "tags", etc.
+  matchedField: string // "title", "city", "category", "tag", etc.
+  matchedValue?: string // The actual matched value for categories/tags
 }
 
 export interface GroupedSearchResults {
   byName: SearchResult[]
   byLocation: SearchResult[]
+  byCategory: SearchResult[]
+  byTag: SearchResult[]
   byOther: SearchResult[]
 }
 
 interface SearchOptions {
   maxNameResults?: number
   maxLocationResults?: number
+  maxCategoryResults?: number
+  maxTagResults?: number
   maxOtherResults?: number
 }
 
 const DEFAULT_OPTIONS: Required<SearchOptions> = {
   maxNameResults: 3,
   maxLocationResults: 5,
-  maxOtherResults: 5,
+  maxCategoryResults: 5,
+  maxTagResults: 5,
+  maxOtherResults: 3,
 }
 
 /**
@@ -88,11 +95,13 @@ export function searchEvents(
 
   // Return empty results for short queries
   if (normalizedQuery.length < 2) {
-    return { byName: [], byLocation: [], byOther: [] }
+    return { byName: [], byLocation: [], byCategory: [], byTag: [], byOther: [] }
   }
 
   const nameResults: SearchResult[] = []
   const locationResults: SearchResult[] = []
+  const categoryResults: SearchResult[] = []
+  const tagResults: SearchResult[] = []
   const otherResults: SearchResult[] = []
 
   // Track which events are already matched to avoid duplicates across categories
@@ -144,42 +153,51 @@ export function searchEvents(
     }
   }
 
-  // Third pass: other matches (description, type, categories, tags)
+  // Third pass: category matches (higher priority than tags)
   for (const event of events) {
     if (matchedEventIds.has(event.id)) continue
 
-    let bestMatch: { field: string; score: number } | null = null
+    const categoryMatch = matchArray(event.categories, normalizedQuery, 70)
+    if (categoryMatch) {
+      categoryResults.push({
+        event,
+        matchType: "category",
+        score: categoryMatch.score,
+        matchedField: "category",
+        matchedValue: categoryMatch.value,
+      })
+      matchedEventIds.add(event.id)
+    }
+  }
 
-    // Check description
-    const descScore = calculateScore(event.description, normalizedQuery, 50)
+  // Fourth pass: tag matches
+  for (const event of events) {
+    if (matchedEventIds.has(event.id)) continue
+
+    const tagMatch = matchArray(event.tags, normalizedQuery, 65)
+    if (tagMatch) {
+      tagResults.push({
+        event,
+        matchType: "tag",
+        score: tagMatch.score,
+        matchedField: "tag",
+        matchedValue: tagMatch.value,
+      })
+      matchedEventIds.add(event.id)
+    }
+  }
+
+  // Fifth pass: other matches (description only)
+  for (const event of events) {
+    if (matchedEventIds.has(event.id)) continue
+
+    const descScore = calculateScore(event.description, normalizedQuery, 40)
     if (descScore > 0) {
-      bestMatch = { field: "description", score: descScore }
-    }
-
-    // Check type
-    const typeScore = calculateScore(event.type, normalizedQuery, 50)
-    if (typeScore > 0 && (!bestMatch || typeScore > bestMatch.score)) {
-      bestMatch = { field: "type", score: typeScore }
-    }
-
-    // Check categories
-    const categoryMatch = matchArray(event.categories, normalizedQuery, 50)
-    if (categoryMatch && (!bestMatch || categoryMatch.score > bestMatch.score)) {
-      bestMatch = { field: "category", score: categoryMatch.score }
-    }
-
-    // Check tags
-    const tagMatch = matchArray(event.tags, normalizedQuery, 50)
-    if (tagMatch && (!bestMatch || tagMatch.score > bestMatch.score)) {
-      bestMatch = { field: "tag", score: tagMatch.score }
-    }
-
-    if (bestMatch) {
       otherResults.push({
         event,
         matchType: "other",
-        score: bestMatch.score,
-        matchedField: bestMatch.field,
+        score: descScore,
+        matchedField: "description",
       })
     }
   }
@@ -190,6 +208,8 @@ export function searchEvents(
   return {
     byName: nameResults.sort(sortByScore).slice(0, opts.maxNameResults),
     byLocation: locationResults.sort(sortByScore).slice(0, opts.maxLocationResults),
+    byCategory: categoryResults.sort(sortByScore).slice(0, opts.maxCategoryResults),
+    byTag: tagResults.sort(sortByScore).slice(0, opts.maxTagResults),
     byOther: otherResults.sort(sortByScore).slice(0, opts.maxOtherResults),
   }
 }
@@ -201,6 +221,8 @@ export function hasResults(results: GroupedSearchResults): boolean {
   return (
     results.byName.length > 0 ||
     results.byLocation.length > 0 ||
+    results.byCategory.length > 0 ||
+    results.byTag.length > 0 ||
     results.byOther.length > 0
   )
 }

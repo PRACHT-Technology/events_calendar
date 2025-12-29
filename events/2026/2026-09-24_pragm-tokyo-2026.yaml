@@ -1,22 +1,16 @@
-title: Pragm Tokyo 2026
+title: "Pragm Tokyo 2026"
 startDate: "2026-09-24"
-url: https://ethglobal.com/events/pragma-tokyo2026
-
-description: >
-  One-day ETHGlobal summit preceding Tokyo hackathon
-
-type: conference
+url: "https://ethglobal.com/events/pragma-tokyo2026"
+description: "One-day ETHGlobal summit preceding Tokyo hackathon\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: Tokyo
-  country: Japan
-  continent: asia
-
-attendance: "1000+"
-
+  city: "Tokyo"
+  country: "Japan"
+  continent: "asia"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

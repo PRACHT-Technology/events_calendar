@@ -1,18 +1,13 @@
-title: Istanbul Blockchain Week
+title: "Istanbul Blockchain Week"
 startDate: "2026-06-02"
 endDate: "2026-06-03"
-url: https://istanbulblockchainweek.com
-
-description: >
-  Istanbul blockchain week conference
-
-type: conference
+url: "https://istanbulblockchainweek.com"
+description: "Istanbul blockchain week conference\n"
 categories:
-  - blockchain
-
+  - "conference"
 location:
-  city: Istanbul
-  country: Turkey
-  continent: europe
-
-attendance: "3000+"
+  city: "Istanbul"
+  country: "Turkey"
+  continent: "europe"
+tags:
+  - "blockchain"

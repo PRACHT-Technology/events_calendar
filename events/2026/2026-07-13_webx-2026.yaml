@@ -1,21 +1,15 @@
-title: WebX 2026
+title: "WebX 2026"
 startDate: "2026-07-13"
 endDate: "2026-07-14"
-url: https://webx-asia.com
-
-description: >
-  Asias largest global Web3 conference on blockchain crypto assets and Web3 technologies
-
-type: conference
+url: "https://webx-asia.com"
+description: "Asias largest global Web3 conference on blockchain crypto assets and Web3 technologies\n"
 categories:
-  - web3
-
+  - "conference"
 location:
-  city: Tokyo
-  country: Japan
-  continent: asia
-
-attendance: "5000+"
-
+  city: "Tokyo"
+  country: "Japan"
+  continent: "asia"
 social:
-  twitter: https://x.com/webx_asia
+  twitter: "https://x.com/webx_asia"
+tags:
+  - "web3"

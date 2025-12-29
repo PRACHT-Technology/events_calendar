@@ -1,17 +1,13 @@
-title: Crypto Assets Conference
+title: "Crypto Assets Conference"
 startDate: "2026-03-25"
-url: https://crypto-assets-conference.de/
-
-description: >
-  Institutional conference on tokenization and digital assets regulation (MiCA)
-
-type: conference
+url: "https://crypto-assets-conference.de/"
+description: "Institutional conference on tokenization and digital assets regulation (MiCA)\n"
 categories:
-  - institutional
-
+  - "conference"
 location:
-  city: Frankfurt
-  country: Germany
-  continent: europe
-
-attendance: "1500+"
+  city: "Frankfurt"
+  country: "Germany"
+  continent: "europe"
+tags:
+  - "institutional"
+  - "blockchain"

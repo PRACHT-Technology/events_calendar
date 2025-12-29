@@ -72,16 +72,20 @@ export async function loadEvents(): Promise<CalendarEvent[]> {
           description: yamlEvent.description,
           url: yamlEvent.url,
           location: formatLocation(yamlEvent.location),
-          twitterUrl: yamlEvent.social?.twitter,
 
-          // Structured location for search
+          // Structured location for search/display
           locationCity: yamlEvent.location?.city,
           locationCountry: yamlEvent.location?.country,
           locationVenue: yamlEvent.location?.venue,
           locationContinent: yamlEvent.location?.continent,
 
+          // Social links
+          twitterUrl: yamlEvent.social?.twitter,
+          telegramUrl: yamlEvent.social?.telegram,
+          discordUrl: yamlEvent.social?.discord,
+          farcasterUrl: yamlEvent.social?.farcaster,
+
           // Searchable metadata
-          type: yamlEvent.type,
           categories: yamlEvent.categories,
           tags: yamlEvent.tags,
         }

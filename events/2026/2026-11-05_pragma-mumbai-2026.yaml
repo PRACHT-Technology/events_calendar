@@ -1,22 +1,16 @@
-title: Pragma Mumbai 2026
+title: "Pragma Mumbai 2026"
 startDate: "2026-11-05"
-url: https://ethglobal.com/events/pragma-mumbai
-
-description: >
-  One-day ETHGlobal summit preceding Mumbai hackathon
-
-type: conference
+url: "https://ethglobal.com/events/pragma-mumbai"
+description: "One-day ETHGlobal summit preceding Mumbai hackathon\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: Mumbai
-  country: India
-  continent: asia
-
-attendance: "1000+"
-
+  city: "Mumbai"
+  country: "India"
+  continent: "asia"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

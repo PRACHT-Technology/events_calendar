@@ -6,16 +6,20 @@ export interface CalendarEvent {
   description?: string
   url: string // link to event homepage
   location?: string // formatted string for display
-  twitterUrl?: string
 
-  // Structured location for search
+  // Structured location for search/display
   locationCity?: string
   locationCountry?: string
   locationVenue?: string
   locationContinent?: string
 
+  // Social links
+  twitterUrl?: string
+  telegramUrl?: string
+  discordUrl?: string
+  farcasterUrl?: string
+
   // Searchable metadata
-  type?: string // "conference" | "hackathon" | etc.
-  categories?: string[] // ["ethereum", "defi", ...]
-  tags?: string[] // custom tags
+  categories?: string[] // ["ethereum", "defi", ...] - max 2
+  tags?: string[] // custom tags - 1 or more
 }

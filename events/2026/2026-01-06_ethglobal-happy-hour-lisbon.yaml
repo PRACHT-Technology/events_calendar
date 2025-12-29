@@ -1,22 +1,16 @@
-title: ETHGlobal Happy Hour Lisbon
+title: "ETHGlobal Happy Hour Lisbon"
 startDate: "2026-01-06"
-url: https://luma.com/event/evt-ahOKSViGTCFVHs4
-
-description: >
-  Casual networking event for ETHGlobal community in Lisbon
-
-type: meetup
+url: "https://luma.com/event/evt-ahOKSViGTCFVHs4"
+description: "Casual networking event for ETHGlobal community in Lisbon\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: Lisbon
-  country: Portugal
-  continent: europe
-
-attendance: "200-300"
-
+  city: "Lisbon"
+  country: "Portugal"
+  continent: "europe"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

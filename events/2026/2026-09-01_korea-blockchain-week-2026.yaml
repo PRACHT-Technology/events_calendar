@@ -1,21 +1,15 @@
-title: Korea Blockchain Week 2026
+title: "Korea Blockchain Week 2026"
 startDate: "2026-09-01"
 endDate: "2026-09-07"
-url: https://koreablockchainweek.com
-
-description: >
-  Asias largest blockchain event with 340+ speakers. Focus: AI integration RWA tokenization L1/L2 scalability
-
-type: festival
+url: "https://koreablockchainweek.com"
+description: "Asias largest blockchain event with 340+ speakers. Focus: AI integration RWA tokenization L1/L2 scalability\n"
 categories:
-  - blockchain
-
+  - "conference"
 location:
-  city: Seoul
-  country: South Korea
-  continent: asia
-
-attendance: "7000+"
-
+  city: "Seoul"
+  country: "South Korea"
+  continent: "asia"
 social:
-  twitter: https://x.com/KBW_official
+  twitter: "https://x.com/KBW_official"
+tags:
+  - "blockchain"

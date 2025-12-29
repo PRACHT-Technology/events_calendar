@@ -5,10 +5,9 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import type { CalendarEvent } from "@/types/event"
-import { eventTypeColors } from "@/lib/event-schema"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, X, MapPin, Calendar, ArrowRight } from "lucide-react"
+import { ExternalLink, X, MapPin, Calendar, ArrowRight, Tag } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import { format, parseISO } from "date-fns"
 
 function XIcon({ className }: { className?: string }) {
@@ -90,21 +89,7 @@ export function EventPopover({ event, children, open = false, onOpenChange }: Ev
 
               <div className="flex flex-col gap-4 pr-6">
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-lg">{event.title}</h3>
-                    {event.type && (
-                      <Badge
-                        variant="outline"
-                        className="text-[10px] px-1.5 py-0 h-5"
-                        style={{
-                          borderColor: eventTypeColors[event.type] || "#6b7280",
-                          color: eventTypeColors[event.type] || "#6b7280",
-                        }}
-                      >
-                        {event.type}
-                      </Badge>
-                    )}
-                  </div>
+                  <h3 className="font-semibold text-lg mb-1">{event.title}</h3>
                   <div className="flex flex-col gap-1.5 mt-3">
                     <span className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Calendar className="h-4 w-4" />
@@ -121,6 +106,17 @@ export function EventPopover({ event, children, open = false, onOpenChange }: Ev
 
                 {event.description && (
                   <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
+                )}
+
+                {event.tags && event.tags.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <Tag className="h-3.5 w-3.5 text-muted-foreground flex-shrink-0" />
+                    {event.tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-[10px] px-1.5 py-0 h-5">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
                 )}
 
                 <div className="flex flex-col gap-2 mt-2">

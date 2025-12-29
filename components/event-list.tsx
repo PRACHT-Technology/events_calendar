@@ -8,9 +8,9 @@ import { ExternalLink, Copy, Check } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import type { CalendarEvent } from "@/types/event"
-import { eventTypeColors } from "@/lib/event-schema"
 import { cn } from "@/lib/utils"
 import { EventPopover } from "@/components/event-popover"
+import { getEventColor, categoryColors } from "@/lib/event-schema"
 
 interface EventListProps {
   events: CalendarEvent[]
@@ -139,19 +139,24 @@ export function EventList({ events }: EventListProps) {
                               )}
                             >
                               <div className="flex items-center gap-2 min-w-0">
+                                <span
+                                  className="w-2 h-2 rounded-full flex-shrink-0"
+                                  style={{ backgroundColor: getEventColor(event.categories) }}
+                                />
                                 <span className="truncate font-medium">{event.title}</span>
-                                {event.type && (
+                                {event.categories?.slice(0, 2).map((cat) => (
                                   <Badge
+                                    key={cat}
                                     variant="outline"
                                     className="text-[9px] px-1.5 py-0 h-4 flex-shrink-0"
                                     style={{
-                                      borderColor: eventTypeColors[event.type] || "#6b7280",
-                                      color: eventTypeColors[event.type] || "#6b7280",
+                                      borderColor: categoryColors[cat] || "#6b7280",
+                                      color: categoryColors[cat] || "#6b7280",
                                     }}
                                   >
-                                    {event.type}
+                                    {cat}
                                   </Badge>
-                                )}
+                                ))}
                               </div>
                               <span className="text-muted-foreground whitespace-nowrap">
                                 {formatDateCompact(event.startDate, event.endDate)}
@@ -203,20 +208,25 @@ export function EventList({ events }: EventListProps) {
                               )}
                             >
                               {/* Row 1: Event name */}
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span
+                                  className="w-2 h-2 rounded-full flex-shrink-0"
+                                  style={{ backgroundColor: getEventColor(event.categories) }}
+                                />
                                 <span className="font-medium">{event.title}</span>
-                                {event.type && (
+                                {event.categories?.slice(0, 2).map((cat) => (
                                   <Badge
+                                    key={cat}
                                     variant="outline"
                                     className="text-[9px] px-1.5 py-0 h-4 flex-shrink-0"
                                     style={{
-                                      borderColor: eventTypeColors[event.type] || "#6b7280",
-                                      color: eventTypeColors[event.type] || "#6b7280",
+                                      borderColor: categoryColors[cat] || "#6b7280",
+                                      color: categoryColors[cat] || "#6b7280",
                                     }}
                                   >
-                                    {event.type}
+                                    {cat}
                                   </Badge>
-                                )}
+                                ))}
                               </div>
                               {/* Row 2: Date, Location, Links */}
                               <div className="flex items-center justify-between pl-4">

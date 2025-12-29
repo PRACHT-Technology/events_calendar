@@ -21,19 +21,6 @@ const continentMap = {
   TBD: "global",
 }
 
-// Map event types
-const typeMap = {
-  Conference: "conference",
-  "Conference + Hackathon": "conference",
-  Hackathon: "hackathon",
-  Meetup: "meetup",
-  "Popup Village/City": "popup-village",
-  Festival: "festival",
-  "Conference + Hackathon + Festival": "festival",
-  Workshop: "workshop",
-  Summit: "summit",
-}
-
 // Map categories
 const categoryMap = {
   Solana: "solana",
@@ -115,9 +102,8 @@ for (let i = 1; i < lines.length; i++) {
     city,
     country,
     continent,
-    type,
+    _type, // unused, kept for CSV column alignment
     category,
-    attendance,
     description,
     website,
     twitter,
@@ -152,10 +138,6 @@ for (let i = 1; i < lines.length; i++) {
     yaml += "\n"
   }
 
-  if (type && typeMap[type]) {
-    yaml += `type: ${typeMap[type]}\n`
-  }
-
   if (category) {
     const cats = category.split(" ").filter((c) => categoryMap[c] || categoryMap[category])
     const mappedCats = cats.length > 0 ? cats.map((c) => categoryMap[c] || categoryMap[category]).filter(Boolean) : []
@@ -187,11 +169,6 @@ for (let i = 1; i < lines.length; i++) {
     }
   }
   yaml += "\n"
-
-  if (attendance) {
-    yaml += `attendance: "${attendance}"\n`
-    yaml += "\n"
-  }
 
   // Social links
   const hasSocial = twitter || telegram || discord || farcaster

@@ -1,23 +1,17 @@
-title: Hack4Privacy Hackathon
+title: "Hack4Privacy Hackathon"
 startDate: "2026-01-27"
 endDate: "2026-02-09"
-url: https://hack4privacy.iexec.io
-
-description: >
-  Confidential DeFi & RWA applications using iExec privacy technology. Prize: 6000 USD
-
-type: hackathon
+url: "https://hack4privacy.iexec.io"
+description: "Confidential DeFi & RWA applications using iExec privacy technology. Prize: 6000 USD\n"
 categories:
-  - blockchain
-  - privacy
-
+  - "hackathon"
 location:
-  city: Online
-  country: Online
-  continent: global
-
-attendance: "200+"
-
+  city: "Online"
+  country: "Online"
+  continent: "global"
 social:
-  twitter: https://x.com/iExecHQ
-  telegram: https://t.me/iexecio
+  twitter: "https://x.com/iExecHQ"
+  telegram: "https://t.me/iexecio"
+tags:
+  - "privacy"
+  - "blockchain"

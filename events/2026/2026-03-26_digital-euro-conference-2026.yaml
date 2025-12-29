@@ -1,20 +1,14 @@
-title: Digital Euro Conference 2026
+title: "Digital Euro Conference 2026"
 startDate: "2026-03-26"
-url: https://digital-euro-conference.de/
-
-description: >
-  Focus on CBDCs stablecoins and future of digital money
-
-type: conference
+url: "https://digital-euro-conference.de/"
+description: "Focus on CBDCs stablecoins and future of digital money\n"
 categories:
-  - institutional
-
+  - "conference"
 location:
-  city: Frankfurt
-  country: Germany
-  continent: europe
-
-attendance: "1000+"
-
+  city: "Frankfurt"
+  country: "Germany"
+  continent: "europe"
 social:
-  twitter: https://x.com/DigiEuro
+  twitter: "https://x.com/DigiEuro"
+tags:
+  - "institutional"

@@ -1,22 +1,17 @@
-title: ETHCluj
+title: "ETHCluj"
 startDate: "2026-05-13"
 endDate: "2026-05-14"
-url: https://www.ethcluj.org/
-
-description: >
-  Regional Ethereum conference celebrating local blockchain community
-
-type: conference
+url: "https://www.ethcluj.org/"
+description: "Regional Ethereum conference celebrating local blockchain community\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Cluj-Napoca
-  country: Romania
-  continent: europe
-
-attendance: "1000+"
-
+  city: "Cluj-Napoca"
+  country: "Romania"
+  continent: "europe"
 social:
-  twitter: https://x.com/ETHCluj
-  telegram: https://t.me/ethcluj
+  twitter: "https://x.com/ETHCluj"
+  telegram: "https://t.me/ethcluj"
+tags:
+  - "ethereum"

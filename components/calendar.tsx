@@ -1,18 +1,16 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { ChevronLeft, ChevronRight, CalendarDays, List, Search, MapPin, Tag } from "lucide-react"
+import { ChevronLeft, ChevronRight, CalendarDays, List, Search, MapPin, Layers, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { CalendarEvent } from "@/types/event"
-import { eventTypeColors } from "@/lib/event-schema"
-import { Badge } from "@/components/ui/badge"
 import { EventPopover } from "@/components/event-popover"
 import { MiniCalendar } from "@/components/mini-calendar"
 import { EventList } from "@/components/event-list"
 import { SearchCommand } from "@/components/search-command"
 import { EventFilter } from "@/components/event-filter"
-import { filterEvents, getLocationOptions, getTypeOptions, type EventFilters } from "@/lib/filters"
+import { filterEvents, getLocationOptions, getCategoryOptions, getTagOptions, type EventFilters } from "@/lib/filters"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -31,6 +29,7 @@ import {
   isWithinInterval,
 } from "date-fns"
 import { cn } from "@/lib/utils"
+import { getEventColor, categoryColors } from "@/lib/event-schema"
 
 interface CalendarProps {
   events?: CalendarEvent[]
@@ -50,17 +49,23 @@ export function Calendar({ events = [] }: CalendarProps) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
   const [locationFilter, setLocationFilter] = useState<string[]>([])
-  const [typeFilter, setTypeFilter] = useState<string[]>([])
+  const [categoryFilter, setCategoryFilter] = useState<string[]>([])
+  const [tagFilter, setTagFilter] = useState<string[]>([])
   const isMobile = useIsMobile()
 
   // Filter options derived from events data
   const locationOptions = useMemo(() => getLocationOptions(events), [events])
-  const typeOptions = useMemo(() => getTypeOptions(), [])
+  const categoryOptions = useMemo(() => getCategoryOptions(), [])
+  const tagOptions = useMemo(() => getTagOptions(events), [events])
 
   // Apply filters to events
   const filteredEvents = useMemo(() => {
-    return filterEvents(events, { locations: locationFilter, types: typeFilter })
-  }, [events, locationFilter, typeFilter])
+    return filterEvents(events, {
+      locations: locationFilter,
+      categories: categoryFilter,
+      tags: tagFilter,
+    })
+  }, [events, locationFilter, categoryFilter, tagFilter])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -186,11 +191,19 @@ export function Calendar({ events = [] }: CalendarProps) {
           />
 
           <EventFilter
-            label="Type"
+            label="Category"
+            icon={<Layers className="h-3.5 w-3.5" />}
+            options={categoryOptions}
+            selected={categoryFilter}
+            onSelectionChange={setCategoryFilter}
+          />
+
+          <EventFilter
+            label="Tags"
             icon={<Tag className="h-3.5 w-3.5" />}
-            options={typeOptions}
-            selected={typeFilter}
-            onSelectionChange={setTypeFilter}
+            options={tagOptions}
+            selected={tagFilter}
+            onSelectionChange={setTagFilter}
           />
 
           <div className="flex border border-border rounded-md overflow-hidden mr-1 md:mr-2">
@@ -314,15 +327,25 @@ export function Calendar({ events = [] }: CalendarProps) {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.1 }}
-                          className="w-full text-left text-[10px] px-1 py-0.5 rounded truncate transition-colors cursor-pointer bg-muted/50 hover:bg-muted flex items-center gap-1"
+                          className="w-full text-left text-[10px] px-1 py-0.5 rounded truncate transition-colors cursor-pointer flex items-center gap-1"
+                          style={{
+                            backgroundColor: `${getEventColor(event.categories)}20`,
+                            borderLeft: `2px solid ${getEventColor(event.categories)}`,
+                          }}
                         >
-                          {event.type && (
-                            <span
-                              className="flex-shrink-0 w-1.5 h-1.5 rounded-full"
-                              style={{ backgroundColor: eventTypeColors[event.type] || "#6b7280" }}
-                            />
+                          <span className="truncate flex-1">{event.title}</span>
+                          {event.categories && event.categories.length > 0 && (
+                            <span className="flex gap-0.5 flex-shrink-0">
+                              {event.categories.slice(0, 2).map((cat) => (
+                                <span
+                                  key={cat}
+                                  className="w-1.5 h-1.5 rounded-full"
+                                  style={{ backgroundColor: categoryColors[cat] || "#6b7280" }}
+                                  title={cat}
+                                />
+                              ))}
+                            </span>
                           )}
-                          <span className="truncate">{event.title}</span>
                         </motion.button>
                       ))}
                       {dayEvents.length > (isMobile ? 1 : 2) && (

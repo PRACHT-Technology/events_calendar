@@ -1,22 +1,17 @@
-title: ETHTokyo Week 2026
+title: "ETHTokyo Week 2026"
 startDate: "2026-09-19"
 endDate: "2026-09-27"
-url: https://www.ethtokyo.org/
-
-description: >
-  Multi-event week including conferences Ethereum Institutional Summit Decentralized AI Summit and hackathon
-
-type: festival
+url: "https://www.ethtokyo.org/"
+description: "Multi-event week including conferences Ethereum Institutional Summit Decentralized AI Summit and hackathon\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Tokyo
-  country: Japan
-  continent: asia
-
-attendance: "5000+"
-
+  city: "Tokyo"
+  country: "Japan"
+  continent: "asia"
 social:
-  twitter: https://x.com/eth_tokyo
-  discord: https://discord.gg/ethtokyo
+  twitter: "https://x.com/eth_tokyo"
+  discord: "https://discord.gg/ethtokyo"
+tags:
+  - "ethereum"

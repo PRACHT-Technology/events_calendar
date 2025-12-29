@@ -1,22 +1,16 @@
-title: Pragma Cannes 2026
+title: "Pragma Cannes 2026"
 startDate: "2026-04-02"
-url: https://ethglobal.com/events/pragma-cannes2026
-
-description: >
-  One-day ETHGlobal summit for builders and founders on technical and product innovation
-
-type: conference
+url: "https://ethglobal.com/events/pragma-cannes2026"
+description: "One-day ETHGlobal summit for builders and founders on technical and product innovation\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: Cannes
-  country: France
-  continent: europe
-
-attendance: "1000+"
-
+  city: "Cannes"
+  country: "France"
+  continent: "europe"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

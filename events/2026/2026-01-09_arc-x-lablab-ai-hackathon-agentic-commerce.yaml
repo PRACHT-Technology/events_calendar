@@ -1,22 +1,17 @@
-title: Arc x Lablab AI Hackathon - Agentic Commerce
+title: "Arc x Lablab AI Hackathon - Agentic Commerce"
 startDate: "2026-01-09"
 endDate: "2026-01-24"
-url: https://lablab.ai
-
-description: >
-  Online + on-site finale hackathon on agentic commerce with Google Gemini and Arc partnership. $5000 in Google Cloud Credits
-
-type: hackathon
+url: "https://lablab.ai"
+description: "Online + on-site finale hackathon on agentic commerce with Google Gemini and Arc partnership. $5000 in Google Cloud Credits\n"
 categories:
-  - ai
-
+  - "hackathon"
 location:
-  city: San Francisco
-  country: USA
-  continent: north-america
-
-attendance: "500+"
-
+  city: "San Francisco"
+  country: "USA"
+  continent: "north-america"
 social:
-  twitter: https://x.com/lablabai
-  farcaster: https://discord.com/invite/lablab
+  twitter: "https://x.com/lablabai"
+  farcaster: "https://discord.com/invite/lablab"
+tags:
+  - "ai"
+  - "web3"

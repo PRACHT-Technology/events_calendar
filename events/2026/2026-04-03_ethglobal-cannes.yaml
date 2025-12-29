@@ -1,23 +1,18 @@
-title: ETHGlobal Cannes
+title: "ETHGlobal Cannes"
 startDate: "2026-04-03"
 endDate: "2026-04-05"
-url: https://ethglobal.com/events/cannes2026
-
-description: >
-  36-hour IRL hackathon with 29+ workshops on DeFi and Web3 technologies
-
-type: hackathon
+url: "https://ethglobal.com/events/cannes2026"
+description: "36-hour IRL hackathon with 29+ workshops on DeFi and Web3 technologies\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Cannes
-  country: France
-  continent: europe
-
-attendance: "800+"
-
+  city: "Cannes"
+  country: "France"
+  continent: "europe"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

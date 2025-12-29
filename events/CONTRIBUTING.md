@@ -51,8 +51,11 @@ endDate: "2026-02-21"          # For multi-day events
 description: >
   Brief description of the event (max 500 chars).
 
-type: conference               # See types below
-categories:                    # See categories below
+categories:                    # Event format (1-2 max)
+  - conference
+  - hackathon
+
+tags:                          # Topic tags
   - ethereum
   - defi
 
@@ -62,45 +65,28 @@ location:
   country: USA
   continent: north-america     # See continents below
 
-attendance: "25000+"           # Expected attendees
-
 social:
   twitter: https://x.com/ethereumdenver
   telegram: https://t.me/Ethdenver
   discord: https://discord.gg/ethdenver
   farcaster: https://farcaster.xyz/ethdenver
-
-tags:
-  - hackathon
-  - builders
 ```
-
-### Event Types
-
-Use one of:
-- `conference`
-- `hackathon`
-- `meetup`
-- `popup-village`
-- `festival`
-- `workshop`
-- `summit`
 
 ### Categories
 
-Use one or more of (first determines color):
-- `ethereum` (purple)
-- `solana` (green)
-- `bitcoin` (orange)
-- `blockchain` (blue)
-- `ai` (violet)
-- `defi` (emerald)
-- `privacy` (indigo)
-- `institutional` (cyan)
-- `developer` (amber)
-- `zk` (pink)
-- `web3` (teal)
-- `rwa` (lime)
+Event format (use 1-2):
+- `conference` - talks, panels, expo
+- `hackathon` - building competition
+- `meetup` - casual networking
+- `coworking` - shared workspace
+- `popup-village` - multi-week co-living (Zuzalu-style)
+
+### Tags
+
+Topic tags (use 1-3):
+- `ethereum`, `solana`, `bitcoin`, `blockchain`
+- `ai`, `defi`, `privacy`, `zk`
+- `institutional`, `developer`, `web3`, `rwa`
 
 ### Continents
 
@@ -115,7 +101,7 @@ Use one of:
 
 ## Examples
 
-### Full Event (Conference)
+### Full Event (Conference + Hackathon)
 
 ```yaml
 title: ETHDenver
@@ -127,10 +113,12 @@ description: >
   World's largest Ethereum BUIDLathon with 25000+ innovators
   from 125+ countries.
 
-type: conference
 categories:
+  - conference
+  - hackathon
+
+tags:
   - ethereum
-  - defi
 
 location:
   venue: National Western Complex
@@ -138,15 +126,9 @@ location:
   country: USA
   continent: north-america
 
-attendance: "25000+"
-
 social:
   twitter: https://x.com/ethereumdenver
   telegram: https://t.me/Ethdenver
-
-tags:
-  - buidlathon
-  - hackathon
 ```
 
 ### Minimal Event (Meetup)
@@ -156,8 +138,10 @@ title: ETHGlobal Happy Hour Lisbon
 startDate: "2026-01-06"
 url: https://luma.com/event/xyz
 
-type: meetup
 categories:
+  - meetup
+
+tags:
   - ethereum
 
 location:
@@ -166,7 +150,7 @@ location:
   continent: europe
 ```
 
-### Online Event
+### Online Event (Hackathon)
 
 ```yaml
 title: HackMoney 2026
@@ -176,8 +160,10 @@ url: https://ethglobal.com/events/hackmoney2026
 
 description: The largest DeFi hackathon with async virtual format.
 
-type: hackathon
 categories:
+  - hackathon
+
+tags:
   - ethereum
   - defi
 
@@ -185,8 +171,33 @@ location:
   city: Online
   country: Online
   continent: global
+```
 
-attendance: "5000+"
+### Popup Village
+
+```yaml
+title: ZuKas
+startDate: "2026-04-10"
+endDate: "2026-05-10"
+url: https://www.zukas.city/
+
+description: Month-long Web3 festival and popup village in scenic Turkish coastal town.
+
+categories:
+  - popup-village
+
+tags:
+  - web3
+  - zk
+
+location:
+  city: Kaş
+  country: Turkey
+  continent: europe
+
+social:
+  twitter: https://x.com/zuzalukas
+  telegram: https://t.me/zuzalukas
 ```
 
 ## Validation
@@ -198,7 +209,7 @@ Your event will be validated against the schema when the site builds. Common iss
 | Invalid date format | Use `"YYYY-MM-DD"` with quotes |
 | End date before start | Ensure `endDate >= startDate` |
 | Invalid URL | Must start with `https://` |
-| Invalid type/category | Check allowed values above |
+| Invalid category | Check allowed values above |
 
 ## Questions?
 

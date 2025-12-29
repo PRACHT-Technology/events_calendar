@@ -1,31 +1,37 @@
 import { z } from "zod"
 
-// Valid event types
-export const eventTypes = [
+// Valid categories (event format)
+export const categories = [
   "conference",
   "hackathon",
   "meetup",
+  "coworking",
   "popup-village",
-  "festival",
-  "workshop",
-  "summit",
 ] as const
 
-// Valid categories
-export const categories = [
-  "ethereum",
-  "solana",
-  "bitcoin",
-  "blockchain",
-  "ai",
-  "defi",
-  "privacy",
-  "institutional",
-  "developer",
-  "zk",
-  "web3",
-  "rwa",
-] as const
+// Category to color mapping
+export const categoryColors: Record<string, string> = {
+  conference: "#3B82F6",    // Blue
+  hackathon: "#8B5CF6",     // Purple
+  meetup: "#10B981",        // Green
+  coworking: "#F59E0B",     // Amber
+  "popup-village": "#EC4899", // Pink
+}
+
+// Category display labels
+export const categoryLabels: Record<string, string> = {
+  "conference": "Conference",
+  "hackathon": "Hackathon",
+  "meetup": "Meetup",
+  "coworking": "Coworking",
+  "popup-village": "Popup Village",
+}
+
+// Get color for an event based on first category
+export function getEventColor(categories?: string[]): string {
+  if (!categories || categories.length === 0) return "#6b7280" // gray
+  return categoryColors[categories[0]] || "#6b7280"
+}
 
 // Valid continents
 export const continents = [
@@ -37,17 +43,6 @@ export const continents = [
   "oceania",
   "global",
 ] as const
-
-// Event type to color mapping
-export const eventTypeColors: Record<string, string> = {
-  conference: "#3B82F6",      // Blue
-  hackathon: "#8B5CF6",       // Purple
-  meetup: "#10B981",          // Green
-  "popup-village": "#F59E0B", // Amber
-  festival: "#EC4899",        // Pink
-  workshop: "#06B6D4",        // Cyan
-  summit: "#6366F1",          // Indigo
-}
 
 // Location schema
 const locationSchema = z
@@ -83,10 +78,8 @@ export const eventSchema = z
       .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD format")
       .optional(),
     description: z.string().max(500).optional(),
-    type: z.enum(eventTypes).optional(),
-    categories: z.array(z.enum(categories)).optional(),
+    categories: z.array(z.enum(categories)).max(2).optional(),
     location: locationSchema,
-    attendance: z.string().optional(),
     social: socialSchema,
     tags: z.array(z.string().max(50)).max(10).optional(),
   })
@@ -101,6 +94,5 @@ export const eventSchema = z
   )
 
 export type YAMLEvent = z.infer<typeof eventSchema>
-export type EventType = (typeof eventTypes)[number]
 export type Category = (typeof categories)[number]
 export type Continent = (typeof continents)[number]

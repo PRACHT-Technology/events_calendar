@@ -1,22 +1,17 @@
-title: Digital Assets Forum
+title: "Digital Assets Forum"
 startDate: "2026-02-05"
 endDate: "2026-02-06"
-url: https://eblockchainconvention.com/digital-assets-forum/
-
-description: >
-  Institutional conference focused on tokenization and digital assets
-
-type: conference
+url: "https://eblockchainconvention.com/digital-assets-forum/"
+description: "Institutional conference focused on tokenization and digital assets\n"
 categories:
-  - institutional
-
+  - "conference"
 location:
-  city: London
-  country: United Kingdom
-  continent: europe
-
-attendance: "1500+"
-
+  city: "London"
+  country: "United Kingdom"
+  continent: "europe"
 social:
-  twitter: https://twitter.com/EBlockchainCon
-  telegram: https://t.me/EuropeanBlockchainConvention/1
+  twitter: "https://twitter.com/EBlockchainCon"
+  telegram: "https://t.me/EuropeanBlockchainConvention/1"
+tags:
+  - "institutional"
+  - "blockchain"

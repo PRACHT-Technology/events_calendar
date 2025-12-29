@@ -1,22 +1,17 @@
-title: Paris Blockchain Week
+title: "Paris Blockchain Week"
 startDate: "2026-04-15"
 endDate: "2026-04-16"
-url: https://www.parisblockchainweek.com/
-
-description: >
-  Europes largest blockchain convergence with 10000+ industry leaders
-
-type: conference
+url: "https://www.parisblockchainweek.com/"
+description: "Europes largest blockchain convergence with 10000+ industry leaders\n"
 categories:
-  - ethereum
-
+  - "conference"
 location:
-  city: Paris
-  country: France
-  continent: europe
-
-attendance: "10000+"
-
+  city: "Paris"
+  country: "France"
+  continent: "europe"
 social:
-  twitter: https://x.com/ParisBlockWeek
-  telegram: https://t.me/pbwsummit
+  twitter: "https://x.com/ParisBlockWeek"
+  telegram: "https://t.me/pbwsummit"
+tags:
+  - "ethereum"
+  - "blockchain"

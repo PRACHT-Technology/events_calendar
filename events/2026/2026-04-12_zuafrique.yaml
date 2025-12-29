@@ -1,21 +1,16 @@
-title: ZuAfrique
+title: "ZuAfrique"
 startDate: "2026-04-12"
 endDate: "2026-05-03"
-url: https://zuafrique.com/
-
-description: >
-  Africas largest crypto and blockchain event with 1000+ attendees
-
-type: popup-village
+url: "https://zuafrique.com/"
+description: "Africas largest crypto and blockchain event with 1000+ attendees\n"
 categories:
-  - web3
-
+  - "popup-village"
 location:
-  city: Kilifi
-  country: Kenya
-  continent: africa
-
-attendance: "1000+"
-
+  city: "Kilifi"
+  country: "Kenya"
+  continent: "africa"
 social:
-  twitter: https://x.com/zuafrique
+  twitter: "https://x.com/zuafrique"
+tags:
+  - "web3"
+  - "ethereum"

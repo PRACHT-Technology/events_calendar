@@ -1,23 +1,19 @@
-title: ETHPrague
+title: "ETHPrague"
 startDate: "2026-05-08"
 endDate: "2026-05-10"
-url: https://www.ethprague.org/
-
-description: >
-  5-year anniversary builders summit combining conference and hackathon
-
-type: conference
+url: "https://www.ethprague.org/"
+description: "5-year anniversary builders summit combining conference and hackathon\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Prague
-  country: Czech Republic
-  continent: europe
-
-attendance: "3000+"
-
+  city: "Prague"
+  country: "Czech Republic"
+  continent: "europe"
 social:
-  twitter: https://x.com/EthPrague
-  telegram: https://t.me/ethprague
-  farcaster: https://farcaster.xyz/ethprague
+  twitter: "https://x.com/EthPrague"
+  telegram: "https://t.me/ethprague"
+  farcaster: "https://farcaster.xyz/ethprague"
+tags:
+  - "ethereum"
+  - "privacy"

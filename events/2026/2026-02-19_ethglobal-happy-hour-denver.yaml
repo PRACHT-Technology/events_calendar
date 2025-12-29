@@ -1,22 +1,16 @@
-title: ETHGlobal Happy Hour Denver
+title: "ETHGlobal Happy Hour Denver"
 startDate: "2026-02-19"
-url: https://lu.ma/event/evt-Ksn9hJbXkw6KP2u
-
-description: >
-  Casual networking event for ETHGlobal community
-
-type: meetup
+url: "https://lu.ma/event/evt-Ksn9hJbXkw6KP2u"
+description: "Casual networking event for ETHGlobal community\n"
 categories:
-  - ethereum
-
+  - "meetup"
 location:
-  city: Denver
-  country: USA
-  continent: north-america
-
-attendance: "300-500"
-
+  city: "Denver"
+  country: "USA"
+  continent: "north-america"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

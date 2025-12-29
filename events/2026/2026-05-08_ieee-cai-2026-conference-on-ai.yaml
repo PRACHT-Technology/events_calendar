@@ -1,17 +1,14 @@
-title: IEEE CAI 2026 (Conference on AI)
+title: "IEEE CAI 2026 (Conference on AI)"
 startDate: "2026-05-08"
 endDate: "2026-05-10"
-url: https://example.com
-
-description: >
-  https://www.ieee-cai.org
-
-
+url: "https://example.com"
+description: "https://www.ieee-cai.org\n"
 location:
-  city: Spain
-  country: Europe
-
-attendance: "Premier international conference on AI applications in healthcare transportation robotics computer vision security and ethics"
-
+  city: "Spain"
+  country: "Europe"
 social:
-  telegram: https://discord.com
+  telegram: "https://discord.com"
+categories:
+  - "conference"
+tags:
+  - "ai"

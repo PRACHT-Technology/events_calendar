@@ -1,5 +1,5 @@
 import type { CalendarEvent } from "@/types/event"
-import { eventTypes, continents } from "@/lib/event-schema"
+import { continents, categories, categoryLabels } from "@/lib/event-schema"
 
 export interface FilterOption {
   value: string
@@ -9,7 +9,8 @@ export interface FilterOption {
 
 export interface EventFilters {
   locations: string[]
-  types: string[]
+  categories: string[]
+  tags: string[]
 }
 
 const continentLabels: Record<string, string> = {
@@ -22,39 +23,38 @@ const continentLabels: Record<string, string> = {
   "global": "Global / Online",
 }
 
-const typeLabels: Record<string, string> = {
-  "conference": "Conference",
-  "hackathon": "Hackathon",
-  "meetup": "Meetup",
-  "popup-village": "Pop-up Village",
-  "festival": "Festival",
-  "workshop": "Workshop",
-  "summit": "Summit",
-}
-
 export function filterEvents(
   events: CalendarEvent[],
   filters: EventFilters
 ): CalendarEvent[] {
-  const { locations, types } = filters
+  const { locations, categories: categoryFilters, tags: tagFilters } = filters
 
-  if (locations.length === 0 && types.length === 0) {
+  if (locations.length === 0 && categoryFilters.length === 0 && tagFilters.length === 0) {
     return events
   }
 
   return events.filter((event) => {
-    // Type filter (OR logic within types)
-    if (types.length > 0) {
-      if (!event.type || !types.includes(event.type)) {
-        return false
-      }
-    }
-
     // Location filter (OR logic within locations)
     if (locations.length > 0) {
       const matchesContinent = event.locationContinent && locations.includes(event.locationContinent)
       const matchesCountry = event.locationCountry && locations.includes(event.locationCountry)
       if (!matchesContinent && !matchesCountry) {
+        return false
+      }
+    }
+
+    // Category filter (OR logic within categories)
+    if (categoryFilters.length > 0) {
+      const matchesCategory = event.categories?.some(cat => categoryFilters.includes(cat))
+      if (!matchesCategory) {
+        return false
+      }
+    }
+
+    // Tag filter (OR logic within tags)
+    if (tagFilters.length > 0) {
+      const matchesTag = event.tags?.some(tag => tagFilters.includes(tag))
+      if (!matchesTag) {
         return false
       }
     }
@@ -103,13 +103,32 @@ export function getLocationOptions(events: CalendarEvent[]): FilterOption[] {
   return options
 }
 
-export function getTypeOptions(): FilterOption[] {
-  return eventTypes.map((type) => ({
-    value: type,
-    label: typeLabels[type] || type,
+export function getCategoryOptions(): FilterOption[] {
+  return categories.map((cat) => ({
+    value: cat,
+    label: categoryLabels[cat] || cat,
   }))
 }
 
+export function getTagOptions(events: CalendarEvent[]): FilterOption[] {
+  const tagSet = new Set<string>()
+
+  for (const event of events) {
+    if (event.tags) {
+      event.tags.forEach(tag => tagSet.add(tag))
+    }
+  }
+
+  return Array.from(tagSet)
+    .sort((a, b) => a.localeCompare(b))
+    .map(tag => ({
+      value: tag,
+      label: tag,
+    }))
+}
+
 export function hasActiveFilters(filters: EventFilters): boolean {
-  return filters.locations.length > 0 || filters.types.length > 0
+  return filters.locations.length > 0 ||
+         filters.categories.length > 0 ||
+         filters.tags.length > 0
 }

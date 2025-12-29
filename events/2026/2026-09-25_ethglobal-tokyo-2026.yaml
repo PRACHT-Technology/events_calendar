@@ -1,23 +1,18 @@
-title: ETHGlobal Tokyo 2026
+title: "ETHGlobal Tokyo 2026"
 startDate: "2026-09-25"
 endDate: "2026-09-27"
-url: https://ethglobal.com/events/tokyo2026
-
-description: >
-  36-hour IRL hackathon during ETHTokyo Week with institutional summit and AI summit
-
-type: hackathon
+url: "https://ethglobal.com/events/tokyo2026"
+description: "36-hour IRL hackathon during ETHTokyo Week with institutional summit and AI summit\n"
 categories:
-  - ethereum
-
+  - "conference"
+  - "hackathon"
 location:
-  city: Tokyo
-  country: Japan
-  continent: asia
-
-attendance: "800+"
-
+  city: "Tokyo"
+  country: "Japan"
+  continent: "asia"
 social:
-  twitter: https://x.com/ethglobal
-  discord: https://ethglobal.com/discord
-  farcaster: https://farcaster.xyz/ethglobal
+  twitter: "https://x.com/ethglobal"
+  discord: "https://ethglobal.com/discord"
+  farcaster: "https://farcaster.xyz/ethglobal"
+tags:
+  - "ethereum"

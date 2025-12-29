@@ -15,7 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { searchEvents, hasResults, type GroupedSearchResults } from "@/lib/search"
 import type { CalendarEvent } from "@/types/event"
-import { eventTypeColors } from "@/lib/event-schema"
+import { getEventColor, categoryColors } from "@/lib/event-schema"
 
 interface SearchCommandProps {
   events: CalendarEvent[]
@@ -37,14 +37,27 @@ function formatDateCompact(start: string, end?: string): string {
 function SearchResultItem({
   event,
   matchedField,
+  matchedValue,
   matchType,
   onSelect,
 }: {
   event: CalendarEvent
   matchedField: string
-  matchType: "name" | "location" | "other"
+  matchedValue?: string
+  matchType: "name" | "location" | "category" | "tag" | "other"
   onSelect: () => void
 }) {
+  const getBadgeStyle = () => {
+    if (matchType === "category" && matchedValue) {
+      const color = categoryColors[matchedValue] || "#6b7280"
+      return {
+        borderColor: color,
+        color: color,
+      }
+    }
+    return undefined
+  }
+
   return (
     <CommandItem
       value={`${event.id}-${event.title}`}
@@ -53,7 +66,7 @@ function SearchResultItem({
     >
       <div
         className="w-2 h-2 rounded-full shrink-0"
-        style={{ backgroundColor: event.type ? eventTypeColors[event.type] || "#6b7280" : "#6b7280" }}
+        style={{ backgroundColor: getEventColor(event.categories) }}
       />
       <div className="flex-1 min-w-0">
         <div className="font-medium truncate text-xs">{event.title}</div>
@@ -68,8 +81,12 @@ function SearchResultItem({
         </div>
       </div>
       {matchType !== "name" && (
-        <Badge variant="outline" className="text-[9px] px-1.5 py-0 h-4 shrink-0">
-          {matchedField}
+        <Badge
+          variant="outline"
+          className="text-[9px] px-1.5 py-0 h-4 shrink-0"
+          style={getBadgeStyle()}
+        >
+          {matchedValue || matchedField}
         </Badge>
       )}
     </CommandItem>
@@ -127,6 +144,7 @@ export function SearchCommand({
                   key={result.event.id}
                   event={result.event}
                   matchedField={result.matchedField}
+                  matchedValue={result.matchedValue}
                   matchType={result.matchType}
                   onSelect={() => handleSelect(result.event)}
                 />
@@ -145,6 +163,7 @@ export function SearchCommand({
                   key={result.event.id}
                   event={result.event}
                   matchedField={result.matchedField}
+                  matchedValue={result.matchedValue}
                   matchType={result.matchType}
                   onSelect={() => handleSelect(result.event)}
                 />
@@ -154,6 +173,44 @@ export function SearchCommand({
 
           {showResults &&
             (results.byName.length > 0 || results.byLocation.length > 0) &&
+            results.byCategory.length > 0 && <CommandSeparator />}
+
+          {showResults && results.byCategory.length > 0 && (
+            <CommandGroup heading="Events by Category">
+              {results.byCategory.map((result) => (
+                <SearchResultItem
+                  key={result.event.id}
+                  event={result.event}
+                  matchedField={result.matchedField}
+                  matchedValue={result.matchedValue}
+                  matchType={result.matchType}
+                  onSelect={() => handleSelect(result.event)}
+                />
+              ))}
+            </CommandGroup>
+          )}
+
+          {showResults &&
+            (results.byName.length > 0 || results.byLocation.length > 0 || results.byCategory.length > 0) &&
+            results.byTag.length > 0 && <CommandSeparator />}
+
+          {showResults && results.byTag.length > 0 && (
+            <CommandGroup heading="Events by Tag">
+              {results.byTag.map((result) => (
+                <SearchResultItem
+                  key={result.event.id}
+                  event={result.event}
+                  matchedField={result.matchedField}
+                  matchedValue={result.matchedValue}
+                  matchType={result.matchType}
+                  onSelect={() => handleSelect(result.event)}
+                />
+              ))}
+            </CommandGroup>
+          )}
+
+          {showResults &&
+            (results.byName.length > 0 || results.byLocation.length > 0 || results.byCategory.length > 0 || results.byTag.length > 0) &&
             results.byOther.length > 0 && <CommandSeparator />}
 
           {showResults && results.byOther.length > 0 && (
@@ -163,6 +220,7 @@ export function SearchCommand({
                   key={result.event.id}
                   event={result.event}
                   matchedField={result.matchedField}
+                  matchedValue={result.matchedValue}
                   matchType={result.matchType}
                   onSelect={() => handleSelect(result.event)}
                 />

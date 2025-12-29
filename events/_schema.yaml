@@ -50,21 +50,10 @@ optional:
     max_length: 500
     example: "World's largest Ethereum BUIDLathon with 25000+ innovators"
 
-  type:
-    type: string
-    allowed_values:
-      - conference
-      - hackathon
-      - meetup
-      - popup-village
-      - festival
-      - workshop
-      - summit
-    example: "conference"
-
   categories:
     type: array of strings
-    description: Event categories for filtering and search
+    description: Event categories for filtering and search (1-2 categories)
+    max_items: 2
     allowed_values:
       - ethereum
       - solana
@@ -107,15 +96,6 @@ optional:
           - global  # for online/virtual events
         example: "north-america"
 
-  attendance:
-    type: string
-    description: Expected attendance range
-    pattern: "digits with optional + or range"
-    examples:
-      - "500+"
-      - "1000-2000"
-      - "25000+"
-
   social:
     type: object
     fields:
@@ -138,9 +118,10 @@ optional:
 
   tags:
     type: array of strings
-    description: Additional searchable keywords
+    description: Additional searchable keywords (1 or more)
+    min_items: 1
     max_items: 10
-    example: ["buidlathon", "hackathon", "builders"]
+    example: ["conference", "hackathon", "buidlathon", "builders"]
 
 # ============================================
 # EXAMPLE: FULL EVENT FILE
@@ -157,7 +138,6 @@ optional:
 #   World's largest Ethereum BUIDLathon with 25000+ innovators
 #   from 125+ countries.
 #
-# type: conference
 # categories:
 #   - ethereum
 #   - defi
@@ -168,13 +148,12 @@ optional:
 #   country: USA
 #   continent: north-america
 #
-# attendance: "25000+"
-#
 # social:
 #   twitter: https://x.com/ethereumdenver
 #   telegram: https://t.me/Ethdenver
 #
 # tags:
+#   - conference
 #   - buidlathon
 #   - hackathon
 #   - flagship
@@ -189,9 +168,11 @@ optional:
 # startDate: "2026-01-06"
 # url: https://luma.com/event/evt-ahOKSViGTCFVHs4
 #
-# type: meetup
 # categories:
 #   - ethereum
+#
+# tags:
+#   - meetup
 #
 # location:
 #   city: Lisbon
