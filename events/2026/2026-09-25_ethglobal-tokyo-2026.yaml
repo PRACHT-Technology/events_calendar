@@ -4,7 +4,6 @@ endDate: "2026-09-27"
 url: "https://ethglobal.com/events/tokyo2026"
 description: "36-hour IRL hackathon during ETHTokyo Week with institutional summit and AI summit\n"
 categories:
-  - "conference"
   - "hackathon"
 location:
   city: "Tokyo"
