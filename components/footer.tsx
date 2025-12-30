@@ -12,7 +12,7 @@ export function Footer() {
         </div>
 
         <span>
-          Open Source maintained by{" "}
+          maintained by{" "}
           <a
             href="https://pracht.tech"
             target="_blank"
@@ -24,7 +24,7 @@ export function Footer() {
         </span>
 
         <a
-          href="https://x.com"
+          href="https://x.com/deinjoni"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-foreground transition-colors"

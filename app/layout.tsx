@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 
@@ -57,6 +58,7 @@ export default function RootLayout({
             </div>
             <Footer />
           </div>
+          <Toaster />
         </NuqsAdapter>
       </body>
     </html>

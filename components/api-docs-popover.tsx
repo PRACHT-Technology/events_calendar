@@ -1,38 +1,57 @@
 "use client"
 
 import {
-  Popover,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Copy } from "@phosphor-icons/react"
+import { toast } from "sonner"
+
+const endpoints = [
+  { path: "/api/events", description: "All events" },
+  { path: "/api/events?year=2026", description: "Events for a specific year" },
+  { path: "/api/events?year=2026&month=01", description: "Events for a specific month" },
+]
 
 export function ApiDocsPopover() {
+  const copyToClipboard = (path: string) => {
+    const fullUrl = `${window.location.origin}${path}`
+    navigator.clipboard.writeText(fullUrl)
+    toast.success("Copied to clipboard", { description: fullUrl })
+  }
+
   return (
-    <Popover>
-      <PopoverTrigger className="hover:text-foreground transition-colors">
+    <Dialog>
+      <DialogTrigger className="hover:text-foreground transition-colors">
         API
-      </PopoverTrigger>
-      <PopoverContent align="start" className="w-80">
-        <PopoverHeader>
-          <PopoverTitle>Events API</PopoverTitle>
-        </PopoverHeader>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Events API</DialogTitle>
+          <DialogDescription>
+            Click an endpoint to copy the full URL.
+          </DialogDescription>
+        </DialogHeader>
         <div className="flex flex-col gap-2 font-mono">
-          <div>
-            <div className="text-muted-foreground">GET /api/events</div>
-            <div className="text-[10px] text-muted-foreground/70">All events</div>
-          </div>
-          <div>
-            <div className="text-muted-foreground">GET /api/events?year=2026</div>
-            <div className="text-[10px] text-muted-foreground/70">Events for a specific year</div>
-          </div>
-          <div>
-            <div className="text-muted-foreground">GET /api/events?year=2026&month=01</div>
-            <div className="text-[10px] text-muted-foreground/70">Events for a specific month</div>
-          </div>
+          {endpoints.map((endpoint) => (
+            <button
+              key={endpoint.path}
+              onClick={() => copyToClipboard(endpoint.path)}
+              className="flex items-center gap-3 p-3 rounded-md hover:bg-muted transition-colors group text-left"
+            >
+              <Copy className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm">GET {endpoint.path}</div>
+                <div className="text-xs text-muted-foreground">{endpoint.description}</div>
+              </div>
+            </button>
+          ))}
         </div>
-      </PopoverContent>
-    </Popover>
+      </DialogContent>
+    </Dialog>
   )
 }
